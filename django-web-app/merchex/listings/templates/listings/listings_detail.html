@@ -1,0 +1,13 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+
+<h2> {{ listing.title }}</h2>
+<h3> {{ listing.band }} </h3>
+{%if listing.description %}
+<h2> Déscription :</h2>
+<p> {{listing.description}}</p>
+{% endif %}
+
+
+{% endblock %}
