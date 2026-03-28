@@ -14,9 +14,12 @@
 
 <p>{{ band.biography }}</p>
 
-{% for listing in band.listing_set.all %}
-<h2> {{listing.title}} </h2>
-{% endfor %}
+{% if band.listings_set.all %}
+<p>Merch :</p>
+    {% for listing in band.listings_set.all %}
+    <ul> <li>{{listing.title}}</li> </ul>
+    {% endfor %}
+{% endif %}
 
 
 <a href="{% url 'band-list' %}">Retour à tous les groupes</a>
