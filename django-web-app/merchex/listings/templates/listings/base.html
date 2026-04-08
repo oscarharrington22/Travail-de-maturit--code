@@ -6,9 +6,10 @@
     </head>
     <body>
         <nav><a href="{% url 'band-list' %}">Groupes</a></nav>
-        
         <nav><a href="{% url 'listing-list' %}">Merch</a></nav>
-     
+        <nav><a href="{% url 'contact' %}">Contactez nous</a></nav>
+        <nav><a href="{% url 'about-us' %}">A propos de nous</a></nav>
+
         {% block content %}{% endblock %}
 
     </body>
