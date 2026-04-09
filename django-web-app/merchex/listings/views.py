@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 
 from listings.models import Band, Listings
-from listings.forms import ContactUsForm
+from listings.forms import BandForm, ListingForm, ContactUsForm
 
 def about(request):
     return render(request,'listings/about.html')
@@ -22,6 +22,21 @@ def band_detail(request, id):
           'listings/band_detail.html',
           {'band': band})
 
+def band_create(request):
+    form = BandForm()
+    if request.method == 'POST' :
+        form = BandForm(request.POST)
+        if form.is_valid :
+            band=form.save()
+            return redirect('band-detail', band.id)
+    
+    else : 
+        form = BandForm()
+
+    return render(request,
+            'listings/bands_create.html',
+            {'form': form})
+
 def listing_list(request):
     listing=Listings.objects.all()
     return render(request, 
@@ -33,6 +48,20 @@ def listing_detail (request, id) :
     return render (request, 
             'listings/listings_detail.html', 
             {'listing' : listing})
+
+def listing_create (request):
+    form = ListingForm()
+
+    if request.method == 'POST':
+        form = ListingForm(request.POST)
+        if form.is_valid() :
+            listing = form.save()
+            return redirect ('listing-detail', listing.id)
+        
+    else :
+        form = ListingForm()   
+
+    return render(request, 'listings/listings_create.html', {'form' : form})
 
 def contact (request) :
     form = ContactUsForm()
