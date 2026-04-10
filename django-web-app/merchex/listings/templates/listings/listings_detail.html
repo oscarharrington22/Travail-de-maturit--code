@@ -9,5 +9,7 @@
 <p> {{listing.description}}</p>
 {% endif %}
 
+<a href="{% url 'listing-list' %}">Retour à la liste de merch</a>
+<a href="{% url 'listing-change' listing.id %}">Modifier la merch</a>
 
 {% endblock %}

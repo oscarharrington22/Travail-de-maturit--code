@@ -6,10 +6,12 @@
 
 <ul>
     {% for listing in listing %}
-        <li><a href="{% url 'listing-detail' listing.id %}">{{ listing.title }}</a> </li>
+        <li><a href="{% url 'listing-detail' listing.id %}">{{ listing.title }}</a>
+            -<a href="{% url 'listing-change' listing.id %}">[modifier]</a> </li>
     {% endfor %} 
 </ul>
 
 <p><a href="{% url 'listing-create' %}">Créer une nouvelle Merch</a></p>
+
 
 {% endblock %}
