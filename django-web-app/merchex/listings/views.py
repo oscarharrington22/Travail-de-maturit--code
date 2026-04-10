@@ -52,6 +52,15 @@ def band_change (request, id):
 
     return render(request, 'listings/bands_change.html', {'form': form })
 
+def band_delete (request, id):
+        band=Band.objects.get(id=id)
+
+        if request.method == 'POST':
+            band.delete()
+            return redirect('band-list')
+        else:
+            return render(request, 'listings/bands_delete.html', {'band' : band })
+
 def listing_list(request):
     listing=Listings.objects.all()
     return render(request, 
@@ -90,6 +99,14 @@ def listing_change (request, id):
         form=ListingForm(instance=listing)   
 
     return render(request,'listings/listing_change.html', {'form':form}) 
+
+def listing_delete (request, id):
+        listing=Listings.objects.get(id=id)
+        if request.method == 'POST':
+            listing.delete()
+            return redirect('listing-list')
+        else:
+            return render(request, 'listings/bands_delete.html', {'listing' : listing })
 
 def contact (request) :
     form = ContactUsForm()
