@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>Vous êtes connecté !</p>
+    <p>Vous êtes connecté en tant que {{ request.user }}.</p>
+    <a href="{% url 'change_password' %}">Changer de mot de passe</a>
 {% endblock content %}
