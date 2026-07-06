@@ -4,6 +4,9 @@
     </head>
     <body>
         <h1>Tutorapp</h1>
+        {% if user.is_authenticated %}
+            <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        {% endif %}
         {% block content %}{% endblock content %}
     </body>
 </html>

@@ -9,7 +9,7 @@ class User (AbstractUser):
         ('allemand', 'Allemand'),
         ('maths', 'Mathématiques'),
         ('physique', 'Physique'),
-        ('éco', 'Économie'),
+        ('eco', 'Économie'),
         ('chimie', 'Chimie'),
         ('bio', 'Biologie'),
         ('philo', 'Philosophie'),
