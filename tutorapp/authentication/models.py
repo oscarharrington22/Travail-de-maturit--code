@@ -33,7 +33,7 @@ class User (AbstractUser):
         verbose_name="Lieu d'habitation"
         )
 
-    possible_prof = models.BooleanField(
+    est_prof = models.BooleanField(
         default=False, 
         verbose_name='Peu donner des cours'
         )
@@ -48,13 +48,3 @@ class User (AbstractUser):
         blank=True,
         null=True
         )
-    
-    possible_eleve = models.BooleanField(
-        default=False,
-        verbose_name='À besoin de cours'
-    )
-    sujets_eleve = models.CharField(
-       choices=SUJETS_CHOIX,
-       verbose_name='Matières', 
-       blank=True 
-    )
