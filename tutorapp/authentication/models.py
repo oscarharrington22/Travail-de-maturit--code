@@ -3,20 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class User (AbstractUser):
-    SUJETS_CHOIX=[
-        ('francais', 'Français'),
-        ('anglais', 'Anglais'),
-        ('allemand', 'Allemand'),
-        ('maths', 'Mathématiques'),
-        ('physique', 'Physique'),
-        ('eco', 'Économie'),
-        ('chimie', 'Chimie'),
-        ('bio', 'Biologie'),
-        ('philo', 'Philosophie'),
-        ('psyco', 'Psycologie'),
-        ('musique', 'Musique'),
-        ('art', 'Arts visuels')
-    ]
 
     profile_photo = models.ImageField(
         verbose_name='Photo de profil',
@@ -37,14 +23,18 @@ class User (AbstractUser):
         default=False, 
         verbose_name='Peu donner des cours'
         )
-    sujets_prof = models.CharField(
-        choices=SUJETS_CHOIX,
-        verbose_name='Matières', 
-        blank=True
-        )
+
+    sujets_prof = models.ManyToManyField(Sujet, blank=True, verbose_name='Sujets enseignés')
+
     tarif = models.PositiveIntegerField(
         validators=[MinValueValidator(0)], 
         verbose_name="Tariff à l'heure" ,
         blank=True,
         null=True
         )
+    
+class Sujet(models.Model):
+    nom = models.CharField(max_length=100, verbose_name='Nom du sujet')
+
+    def __str__(self):
+        return self.nom
