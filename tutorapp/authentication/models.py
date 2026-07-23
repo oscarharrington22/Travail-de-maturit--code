@@ -27,10 +27,15 @@ class User (AbstractUser):
 
     est_prof = models.BooleanField(
         default=False, 
-        verbose_name='Peu donner des cours'
+        verbose_name='Peut donner des cours'
         )
 
-    sujets_prof = models.ManyToManyField(Sujet, blank=True, verbose_name='Sujets enseignés')
+    sujets_prof = models.ManyToManyField(
+        Sujet,
+        blank=True,  
+        null=True,
+        verbose_name='Sujets enseignés'       
+        )
 
     tarif = models.PositiveIntegerField(
         validators=[MinValueValidator(0)], 
