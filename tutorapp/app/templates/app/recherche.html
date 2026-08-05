@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Recherche de répétiteurs</h2>
+<h2>Recherche de répétiteurs</h2>
 
 <form method="get">
     {{ form.as_p }}
@@ -9,11 +9,16 @@
 
 <hr>
 
-{% for repetiteur in repetiteurs %}
+{% for repetiteur in repetiteurs_liste %}
 
-    <h3>{{ repetiteur.username }}</h3>
+    <h2><a href="{% url 'profil' repetiteur.id %}">
+    {{ repetiteur.first_name }} {{ repetiteur.last_name }}
+    </a></h2>
+    <p>Âge : {{repetiteur.age}} ans
+    <br>Ville : {{ repetiteur.ville }}
+    <br>Tarif : {{ repetiteur.tarif }}
+    <br>Matère(s) : {{ repetiteur.sujets_prof }}</p>
 
-    <p>Ville : {{ repetiteur.ville }}<br>Tarif : {{ repetiteur.tarif }}</p>
 
 {% endfor %}
 {% endblock content %}

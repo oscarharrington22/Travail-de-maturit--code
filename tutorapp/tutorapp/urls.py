@@ -41,5 +41,5 @@ urlpatterns = [
     path('home/', app.views.home, name='home'),
 
     path('recherche/', app.views.recherche, name='recherche'),
+    path('profil/<int:user_id>/', app.views.profil, name='profil'),
     ]
-    

@@ -21,7 +21,7 @@ class User (AbstractUser):
         verbose_name='Âge'
         )
     ville = models.CharField(
-        max_length=100, 
+        max_length=20, 
         verbose_name="Lieu d'habitation"
         )
 
@@ -33,7 +33,6 @@ class User (AbstractUser):
     sujets_prof = models.ManyToManyField(
         Sujet,
         blank=True,  
-        null=True,
         verbose_name='Sujets enseignés'       
         )
 
