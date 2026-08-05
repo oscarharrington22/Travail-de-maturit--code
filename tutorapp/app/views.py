@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from authentication.models import User
 from .forms import RechercheForm
 
-#@login_required
 def home(request):
     return render(request, 'app/home.html')
 

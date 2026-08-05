@@ -5,13 +5,13 @@
 <p>Âge : {{repetiteur.age}} ans
 <br>Ville : {{ repetiteur.ville }}
 <br>Tarif : {{ repetiteur.tarif }}
-<br>Matère(s) :</p>
+<br>Niveau d'études : {{ repetiteur.niveau_etudes }}
+<br>Matère(s) :
 
 <ul>
     {% for sujet in repetiteur.sujets_prof.all %}
         <li>{{ sujet.nom }}</li>
     {% endfor %}
 </ul></p>
-</p>
 
 {% endblock content %}

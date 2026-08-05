@@ -8,9 +8,15 @@ class Sujet(models.Model):
     def __str__(self):
         return self.nom
 
+class NiveauEtudes(models.Model):
+    nom = models.CharField(max_length=100, verbose_name="Niveau d'études")
+
+    def __str__(self):
+        return self.nom
+
 class User (AbstractUser):
 
-    profile_photo = models.ImageField(
+    photo_de_profil = models.ImageField(
         verbose_name='Photo de profil',
         null=True, 
         blank=True
@@ -24,6 +30,13 @@ class User (AbstractUser):
         max_length=20, 
         verbose_name="Lieu d'habitation"
         )
+
+    bibliographie = models.CharField(
+        max_length=200, 
+        verbose_name="Bibliographie",
+        blank=True,
+        null=True
+    )
 
     est_prof = models.BooleanField(
         default=False, 
@@ -42,3 +55,11 @@ class User (AbstractUser):
         blank=True,
         null=True
         )
+    
+    niveau_etudes = models.ForeignKey(
+        NiveauEtudes,
+        on_delete=models.SET_NULL,
+        blank =True,
+        null=True,
+        verbose_name="Niveau d'études"
+    )

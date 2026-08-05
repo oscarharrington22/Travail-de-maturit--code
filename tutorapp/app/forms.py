@@ -1,5 +1,5 @@
 from django import forms
-from authentication.models import Sujet, User 
+from authentication.models import Sujet, User , NiveauEtudes
 
 class RechercheForm (forms.Form):
     matiere = forms.ModelChoiceField(
@@ -12,6 +12,12 @@ class RechercheForm (forms.Form):
         required=False,
         label="Ville"
         )
+
+    niveau_etudes = forms.ModelChoiceField(
+        queryset= NiveauEtudes.objects.all(),
+        required=False,
+        label="Niveau(x) d'études"
+    )
 
     tarif_max = forms.IntegerField(
         required=False,
