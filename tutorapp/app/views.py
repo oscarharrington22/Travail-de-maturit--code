@@ -11,19 +11,24 @@ def recherche (request):
 
     repetiteurs_liste = User.objects.filter(est_prof=True)
 
-    ville = request.GET.get('ville')
-    matiere = request.GET.get('matiere')
-    tarif_max = request.GET.get('tarif_max')
-    
+    if form.is_valid():
+        ville = form.cleaned_data["ville"]
+        matiere = form.cleaned_data["matiere"]
+        tarif_max = form.cleaned_data["tarif_max"]
+        niveau_etudes = form.cleaned_data["niveau_etudes"]
 
-    if ville :
-        repetiteurs_liste = repetiteurs_liste.filter(ville=ville)
+        if ville:
+            repetiteurs_liste = repetiteurs_liste.filter(ville=ville)
 
-    if matiere :
-        repetiteurs_liste = repetiteurs_liste.filter(sujets_prof=matiere)
-    
-    if tarif_max :
-        repetiteurs_liste = repetiteurs_liste.filter(tarif__lte= tarif_max)
+        if matiere:
+            repetiteurs_liste = repetiteurs_liste.filter(sujets_prof=matiere)
+
+        if tarif_max:
+            repetiteurs_liste = repetiteurs_liste.filter(tarif__lte=tarif_max)
+
+        if niveau_etudes:
+            repetiteurs_liste = repetiteurs_liste.filter(niveau_etudes=niveau_etudes)
+
 
     return render(
         request,
