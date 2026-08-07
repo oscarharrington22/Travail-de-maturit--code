@@ -1,6 +1,18 @@
 from django import forms
 from authentication.models import Sujet, User , NiveauEtudes
 
+class ModifierCompteForm(forms.ModelForm):
+   class Meta:
+     model = User
+     fields = (
+        "first_name",
+        "last_name",
+        "ville",
+        "bibliographie",
+        "tarif",
+        "niveau_etudes",
+        "sujets_prof",)
+
 class RechercheForm (forms.Form):
     matiere = forms.ModelChoiceField(
         queryset= Sujet.objects.all(),

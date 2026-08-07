@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <h2>Modifier mon profil</h2>
+ <p>Veuillez modifier les données que vous souhaitez changer</p>
+
+<form action="" method="post" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Envoyer">
+</form>
+
+{% endblock %}

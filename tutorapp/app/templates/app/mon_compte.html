@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> {{ user.first_name }} {{ user.last_name }} - {{ user.username }}</h2>
+
+<p>Âge : {{ user.age }} ans
+<br>Ville : {{ user.ville }}
+<br>Tarif : {{ user.tarif }}
+<br>Niveau d'études : {{ user.niveau_etudes }}
+<br>Matère(s) :
+
+<ul>
+    {% for sujet in user.sujets_prof.all %}
+        <li>{{ sujet.nom }}</li>
+    {% endfor %}
+</ul>
+
+<br>Bibliographie personelle : {{ user.bibliographie}}</p>
+
+<a href="{% url 'change_password' %}">[Modifier mon mot de passe]</a>
+<a href="{% url 'modifer_compte' %}">[Modifier les données de mon compte]</a> <br>
+<a href="{% url 'home' %}">[Retour à l'aceuil]</a>
+
+
+{% endblock content %}

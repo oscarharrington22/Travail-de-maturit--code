@@ -1,10 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from authentication.models import User
-from .forms import RechercheForm
+from .forms import RechercheForm, ModifierCompteForm
 
 def home(request):
     return render(request, 'app/home.html')
+
+def mon_compte(request):
+    return render(
+        request,
+        'app/mon_compte.html',
+        {"user" : request.user}
+        )
+
+def modifier_compte(request):
+    user = request.user
+
+    if request.method == "POST":
+        form = ModifierCompteForm(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('mon_compte')
+
+    else:
+        form = ModifierCompteForm(instance=user)
+
+    return render(
+        request,
+        'app/modifier_compte.html',
+        {'form': form}
+    )
 
 def recherche (request):
     form = RechercheForm(request.GET)

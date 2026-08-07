@@ -28,17 +28,19 @@ urlpatterns = [
             template_name='authentication/login.html',
             redirect_authenticated_user=True), name='login'),
     path('signup/', authentication.views.signup_page, name='signup'),
+    path('logout/', authentication.views.logout_user, name='logout'),
+
     path('change-password/', PasswordChangeView.as_view(
         template_name='authentication/changepw.html',
         success_url='/change-password-done/'
         ), name='change_password'),
-    
     path('change-password-done/', PasswordChangeDoneView.as_view(
         template_name='authentication/change_pw_done.html'
         ), name='change_password_done'),
 
-    path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', app.views.home, name='home'),
+    path('mon-compte/', app.views.mon_compte, name='mon_compte'),
+    path('modifier-mon-compte/', app.views.modifier_compte, name='modifer_compte'),
 
     path('recherche/', app.views.recherche, name='recherche'),
     path('profil/<int:user_id>/', app.views.profil, name='profil'),

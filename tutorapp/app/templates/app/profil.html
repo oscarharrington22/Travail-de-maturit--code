@@ -12,6 +12,10 @@
     {% for sujet in repetiteur.sujets_prof.all %}
         <li>{{ sujet.nom }}</li>
     {% endfor %}
-</ul></p>
+</ul>
+<br>Bibliographie : <br> {{ repetiteur.bibliographie }}</p>
+
+<a href="{% url 'home' %}">[Retour à l'aceuil]</a>
+<a href="{% url 'recherche' %}">[Retour à la liste de repetiteurs]</a>
 
 {% endblock content %}
