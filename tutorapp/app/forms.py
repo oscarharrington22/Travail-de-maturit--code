@@ -1,5 +1,6 @@
 from django import forms
-from authentication.models import Sujet, User , NiveauEtudes
+from authentication.models import Sujet, User, NiveauEtudes
+from app.models import DemandeLecon
 
 class ModifierCompteForm(forms.ModelForm):
    class Meta:
@@ -36,3 +37,12 @@ class RechercheForm (forms.Form):
         min_value=0,
         label="Tarif maximum"
         )
+
+class DemandeLeconForm (forms.ModelForm):
+    class Meta :
+        model = DemandeLecon
+        fields = (
+            "matiere",
+            "date",
+            "heure",
+            "lieu",)

@@ -44,4 +44,5 @@ urlpatterns = [
 
     path('recherche/', app.views.recherche, name='recherche'),
     path('profil/<int:user_id>/', app.views.profil, name='profil'),
+    path('demande-lecon/<int:user_id>/', app.views.demande_lecon, name = 'demande_lecon')
     ]

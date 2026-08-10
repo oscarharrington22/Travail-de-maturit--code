@@ -69,3 +69,29 @@ def profil (request, user_id):
     repetiteur = User.objects.get(id=user_id)
 
     return render(request, "app/profil.html", {"repetiteur": repetiteur})
+
+def demande_lecon (request, user_id):
+    prof = User.objects.get(id=user_id)
+
+    if request.method == 'POST':
+        form = DemandeLeconForm(request.POST)
+
+        if form.is_valid :
+            demande = form.save(commit=False)
+            demande.eleve = request.user
+            demande.prof = prof
+            demande.save()
+
+            return redirect("home")
+    
+    else :
+        form = DemandeLeconForm()
+
+    return render(
+        request,
+        "app/demande_lecon.html",
+        {
+            "form": form,
+            "prof": prof
+        }
+    )

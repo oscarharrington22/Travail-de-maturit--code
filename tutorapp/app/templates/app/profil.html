@@ -15,7 +15,9 @@
 </ul>
 <br>Bibliographie : <br> {{ repetiteur.bibliographie }}</p>
 
-<a href="{% url 'home' %}">[Retour à l'aceuil]</a>
+<a href="{% url 'demande_lecon' repetiteur.id %}">Demander une leçon</a> <br> <br>
+
+<a href="{% url 'home' %}">[Retour à l'aceuil]</a> <br>
 <a href="{% url 'recherche' %}">[Retour à la liste de repetiteurs]</a>
 
 {% endblock content %}
