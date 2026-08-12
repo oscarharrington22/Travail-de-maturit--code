@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<header>
+
+<a href="{% url 'mes_demandes_envoyees' %}">[Demandes Envoyées]</a>
+<a href="{% url 'mes_demandes_recues' %}">[Demandes Recues]</a>
+
+</header>
+
+{% for demande in demandes_liste %}
+
+    <p><h3>Cours de {{ demande.matiere }}</h3> 
+    Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
+    <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
+    <br>Date : {{ demande.date }}
+    <br>Heure : {{ demande.heure }}
+    <br>Lieu : {{ demande.lieu}}
+</p>
+
+{% endfor %}
+
+{% endblock %}

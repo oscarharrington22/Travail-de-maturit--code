@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from authentication.models import User
-from .forms import RechercheForm, ModifierCompteForm
+from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm
+from app.models import DemandeLecon
 
 def home(request):
     return render(request, 'app/home.html')
@@ -95,3 +96,15 @@ def demande_lecon (request, user_id):
             "prof": prof
         }
     )
+
+def mes_demandes_envoyees (request) :
+
+    demandes_liste = request.user.demandes_comme_eleve.all()
+
+    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
+
+def mes_demandes_recues (request) : 
+
+    demandes_liste = request.user.demandes_comme_prof.all()
+
+    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})

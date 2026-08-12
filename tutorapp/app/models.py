@@ -28,3 +28,5 @@ class DemandeLecon (models.Model):
     heure = models.TimeField(verbose_name='Heure')
     
     lieu = models.CharField(verbose_name='Lieu', max_length=64)
+
+    status = models.BooleanField(verbose_name='Status', default=False)
