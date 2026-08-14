@@ -42,7 +42,12 @@ class DemandeLeconForm (forms.ModelForm):
     class Meta :
         model = DemandeLecon
         fields = (
-            "matiere",
-            "date",
-            "heure",
-            "lieu",)
+            'matiere',
+            'date',
+            'heure',
+            'lieu',)
+
+class StatutDemandeForm(forms.ModelForm):
+    class Meta:
+        model = DemandeLecon
+        fields = ('statut',)

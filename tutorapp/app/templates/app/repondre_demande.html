@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Répondre à la demande</h2>
+
+<p>
+    Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
+    <br>Matière : {{ demande.matiere.nom }}
+    <br>Date : {{ demande.date }}
+    <br>Heure : {{ demande.heure }}
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
+
+{% endblock %}

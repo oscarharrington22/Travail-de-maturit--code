@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import time
 
 class Sujet(models.Model):
     nom = models.CharField(max_length=100, verbose_name='Nom du sujet')
@@ -63,3 +64,29 @@ class User (AbstractUser):
         null=True,
         verbose_name="Niveau d'études"
     )
+
+class Disponibilite(models.Model):
+
+    JOURS = [
+        ("lundi", "Lundi"),
+        ("mardi", "Mardi"),
+        ("mercredi", "Mercredi"),
+        ("jeudi", "Jeudi"),
+        ("vendredi", "Vendredi"),
+        ("samedi", "Samedi"),
+        ("dimanche", "Dimanche"),
+    ]
+
+    prof = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="disponibilites"
+    )
+
+    jour = models.CharField(
+        max_length=10,
+        choices=JOURS,
+    )
+
+    heure_debut = models.TimeField()
+    heure_fin = models.TimeField()

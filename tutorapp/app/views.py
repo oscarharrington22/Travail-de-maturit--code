@@ -76,15 +76,12 @@ def demande_lecon (request, user_id):
 
     if request.method == 'POST':
         form = DemandeLeconForm(request.POST)
-
         if form.is_valid :
             demande = form.save(commit=False)
             demande.eleve = request.user
             demande.prof = prof
             demande.save()
-
             return redirect("home")
-    
     else :
         form = DemandeLeconForm()
 
@@ -98,13 +95,33 @@ def demande_lecon (request, user_id):
     )
 
 def mes_demandes_envoyees (request) :
-
     demandes_liste = request.user.demandes_comme_eleve.all()
 
     return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
 
 def mes_demandes_recues (request) : 
-
     demandes_liste = request.user.demandes_comme_prof.all()
 
     return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
+
+def repondre_demande(request, demande_id):
+    demande = DemandeLecon.objects.get(id=demande_id)
+
+    if demande.prof != request.user:
+        return redirect("mes_demandes_recues")
+
+    if request.method == 'POST':
+        form = StatutDemandeForm(request.POST, instance=demande)
+
+        if form.is_valid():
+            form.save()
+            return redirect("mes_demandes_recues")
+
+    else:
+        form = StatutDemandeForm(instance=demande)
+
+    return render(
+        request,
+        "app/repondre_demande.html",
+        {"form": form, "demande": demande}
+    )

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mes disponibilités</h2>
+
+{% for creneau in disponibilites_liste %}
+
+<li>{{ creneau.jour }} de {{ creneau.heure_depart }} à {{ creneau.heure_fin }}</li>
+
+{% endfor %}
+
+<a href="{% url 'nouvelle_disponibilite' %}">[Ajouter un créneau de disponibilité]</a>
+{% endblock content %}

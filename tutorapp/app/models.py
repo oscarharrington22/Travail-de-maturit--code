@@ -3,6 +3,12 @@ from authentication.models import Sujet, User
 
 class DemandeLecon (models.Model):
 
+    STATUT_CHOIX = [
+        ("en_attente", "En attente"),
+        ("acceptee", "Acceptée"),
+        ("refusee", "Refusée"),
+    ]
+
     eleve = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -29,4 +35,9 @@ class DemandeLecon (models.Model):
     
     lieu = models.CharField(verbose_name='Lieu', max_length=64)
 
-    status = models.BooleanField(verbose_name='Status', default=False)
+    statut = models.CharField(
+        max_length=20,
+        choices=STATUT_CHOIX,
+        default="en_attente",
+        verbose_name="Statut"
+    )
