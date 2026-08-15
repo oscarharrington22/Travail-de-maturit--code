@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from authentication.models import User
+from authentication.models import User, Disponibilite
 from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm
 from app.models import DemandeLecon
 
@@ -43,6 +43,8 @@ def recherche (request):
         matiere = form.cleaned_data["matiere"]
         tarif_max = form.cleaned_data["tarif_max"]
         niveau_etudes = form.cleaned_data["niveau_etudes"]
+        jour = form.cleaned_data['jour']
+        heure = form.cleaned_data['heure']
 
         if ville:
             repetiteurs_liste = repetiteurs_liste.filter(ville=ville)
@@ -56,6 +58,11 @@ def recherche (request):
         if niveau_etudes:
             repetiteurs_liste = repetiteurs_liste.filter(niveau_etudes=niveau_etudes)
 
+        if jour:
+            repetiteurs_liste = repetiteurs_liste.filter(disponibilites__jour=jour)
+
+        if heure:
+            repetiteurs_liste = repetiteurs_liste.filter(disponibilites__heure_debut__lte=heure, disponibilites__heure_fin__gte=heure)
 
     return render(
         request,
@@ -68,8 +75,14 @@ def recherche (request):
 
 def profil (request, user_id):
     repetiteur = User.objects.get(id=user_id)
+    disponibilite_liste = Disponibilite.objects.filter(prof=repetiteur)
 
-    return render(request, "app/profil.html", {"repetiteur": repetiteur})
+    return render(request, "app/profil.html", 
+        {
+        "repetiteur": repetiteur,
+         "disponibilite_liste": disponibilite_liste
+         }
+    )
 
 def demande_lecon (request, user_id):
     prof = User.objects.get(id=user_id)

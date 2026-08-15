@@ -7,14 +7,18 @@
 <br>Tarif : {{ repetiteur.tarif }}
 <br>Niveau d'études : {{ repetiteur.niveau_etudes }}
 <br>Matère(s) :
-
 <ul>
     {% for sujet in repetiteur.sujets_prof.all %}
         <li>{{ sujet.nom }}</li>
     {% endfor %}
 </ul>
 <br>Bibliographie : <br> {{ repetiteur.bibliographie }}</p>
-<br>Adresse électronique : {{ repetiteur.email }}</p>
+<br>Adresse électronique : {{ repetiteur.email }}
+<br>Disponibilités : 
+<ul>{% for disponibilite in disponibilite_liste %}
+    <li>{{disponibilite.jour}} de {{disponibilite.heure_depart}} à {{disponibilite_fin}}</li>
+    {%endfor %}</ul>
+</p>
 
 
 <a href="{% url 'demande_lecon' repetiteur.id %}">[Demander une leçon]</a> <br> <br>

@@ -2,5 +2,7 @@
 {% block content %}
     <a href="{% url 'recherche' %}">[Trouver un répetiteur]</a>
     <a href="{% url 'mon_compte' %}">[Voir mon compte]</a>
+    {% if user.est_prof %}
     <a href="{% url 'mes_demandes_envoyees' %}">[Mes demandes]</a>
+    {% endif %}
 {% endblock content %}

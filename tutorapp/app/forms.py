@@ -1,5 +1,5 @@
 from django import forms
-from authentication.models import Sujet, User, NiveauEtudes
+from authentication.models import Sujet, User, NiveauEtudes, Disponibilite
 from app.models import DemandeLecon
 
 class ModifierCompteForm(forms.ModelForm):
@@ -29,13 +29,24 @@ class RechercheForm (forms.Form):
     niveau_etudes = forms.ModelChoiceField(
         queryset= NiveauEtudes.objects.all(),
         required=False,
-        label="Niveau(x) d'études"
-    )
+        label="Niveau d'études"
+        )
 
     tarif_max = forms.IntegerField(
         required=False,
         min_value=0,
         label="Tarif maximum"
+        )
+
+    jour = forms.ChoiceField(
+        choices=Disponibilite.JOURS,
+        required=False,
+        label="Jour"
+        )
+
+    heure = forms.TimeField(
+        required=False,
+        label="Heure"
         )
 
 class DemandeLeconForm (forms.ModelForm):

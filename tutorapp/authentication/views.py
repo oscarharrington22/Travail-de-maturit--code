@@ -22,6 +22,8 @@ def signup_page(request):
 
 def mes_disponibilites(request):
     disponibilites_liste = request.user.disponibilites.all()
+    if not request.user.est_prof:
+        return redirect('home')
 
     return render(request, 'mes_disponibilites.html',{'disponibilites_liste': disponibilites_liste})
 
