@@ -48,6 +48,7 @@ urlpatterns = [
 
     path('mes-disponibilites', authentication.views.mes_disponibilites, name = 'mes_disponibilites'),
     path('nouvelle-disponibilite', authentication.views.nouvelle_disponibilite, name = 'nouvelle_disponibilite'),
+    path('supprimer-disponibilite/<int:id>', authentication.views.supprimer_disponibilite, name='supprimer_disponibilite'),
 
     path('mes-demandes-envoyees/', app.views.mes_demandes_envoyees, name = 'mes_demandes_envoyees'),
     path('mes-demandes-recues/', app.views.mes_demandes_recues, name = 'mes_demandes_recues'),

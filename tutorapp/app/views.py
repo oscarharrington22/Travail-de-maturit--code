@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from authentication.models import User, Disponibilite
-from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm
+from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm, StatutDemandeForm
 from app.models import DemandeLecon
 
+@login_required
 def home(request):
     return render(request, 'app/home.html')
 
+@login_required
 def mon_compte(request):
     return render(
         request,
@@ -14,6 +16,7 @@ def mon_compte(request):
         {"user" : request.user}
         )
 
+@login_required
 def modifier_compte(request):
     user = request.user
 
@@ -33,6 +36,7 @@ def modifier_compte(request):
         {'form': form}
     )
 
+@login_required
 def recherche (request):
     form = RechercheForm(request.GET)
 
@@ -73,6 +77,7 @@ def recherche (request):
             }
     )
 
+@login_required
 def profil (request, user_id):
     repetiteur = User.objects.get(id=user_id)
     disponibilite_liste = Disponibilite.objects.filter(prof=repetiteur)
@@ -84,6 +89,7 @@ def profil (request, user_id):
          }
     )
 
+@login_required
 def demande_lecon (request, user_id):
     prof = User.objects.get(id=user_id)
 
@@ -107,16 +113,19 @@ def demande_lecon (request, user_id):
         }
     )
 
+@login_required
 def mes_demandes_envoyees (request) :
     demandes_liste = request.user.demandes_comme_eleve.all()
 
     return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
 
+@login_required
 def mes_demandes_recues (request) : 
     demandes_liste = request.user.demandes_comme_prof.all()
 
     return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
 
+@login_required
 def repondre_demande(request, demande_id):
     demande = DemandeLecon.objects.get(id=demande_id)
 

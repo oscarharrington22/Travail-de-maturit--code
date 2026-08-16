@@ -4,5 +4,6 @@
     <a href="{% url 'mon_compte' %}">[Voir mon compte]</a>
     {% if user.est_prof %}
     <a href="{% url 'mes_demandes_envoyees' %}">[Mes demandes]</a>
+    <a href="{% url 'mes_disponibilites' %}">[Mes disponibilités]</a>
     {% endif %}
 {% endblock content %}

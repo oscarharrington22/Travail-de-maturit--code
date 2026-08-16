@@ -16,7 +16,7 @@
 <br>Adresse électronique : {{ repetiteur.email }}
 <br>Disponibilités : 
 <ul>{% for disponibilite in disponibilite_liste %}
-    <li>{{disponibilite.jour}} de {{disponibilite.heure_depart}} à {{disponibilite_fin}}</li>
+    <li>{{disponibilite.jour}} de {{disponibilite.heure_debut}} à {{disponibilite.heure_fin}}</li>
     {%endfor %}</ul>
 </p>
 

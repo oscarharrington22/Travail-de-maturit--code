@@ -2,11 +2,13 @@
 {% block content %}
 <h2>Mes disponibilités</h2>
 
+<ul>
 {% for creneau in disponibilites_liste %}
-
-<li>{{ creneau.jour }} de {{ creneau.heure_depart }} à {{ creneau.heure_fin }}</li>
-
+<li>{{ creneau.jour }} de {{ creneau.heure_debut }} à {{ creneau.heure_fin }}
+    <a href="{% url 'supprimer_disponibilite' creneau.id %}">[Supprimer]</a>
+</li>
 {% endfor %}
+</ul>
 
 <a href="{% url 'nouvelle_disponibilite' %}">[Ajouter un créneau de disponibilité]</a>
 {% endblock content %}

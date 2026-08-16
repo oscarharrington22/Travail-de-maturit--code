@@ -15,6 +15,7 @@
     <br>Date : {{ demande.date }}
     <br>Heure : {{ demande.heure }}
     <br>Lieu : {{ demande.lieu}}
+    <br>Statut : {{ demande.statut }}
 
     {% if demande.statut == "en_attente" and demande.prof == request.user %}
         <br>

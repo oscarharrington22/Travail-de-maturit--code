@@ -10,6 +10,7 @@ class ModifierCompteForm(forms.ModelForm):
         "last_name",
         "ville",
         "bibliographie",
+        "est_prof",
         "tarif",
         "niveau_etudes",
         "sujets_prof",)
