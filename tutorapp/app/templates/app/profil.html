@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2> {{repetiteur.first_name}} {{repetiteur.last_name}}</h2>
-
+{% if repetiteur.photo_de_profil %}
+    <img src="{{ repetiteur.photo_de_profil.url }}"
+         alt="Photo de profil"
+         width="150">
+{% else %}
+    <p>Aucune photo de profil</p>
+{% endif %}
 <p>Âge : {{repetiteur.age}} ans
 <br>Ville : {{ repetiteur.ville }}
 <br>Tarif : {{ repetiteur.tarif }}

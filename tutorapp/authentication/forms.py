@@ -20,10 +20,15 @@ class SignupForm(UserCreationForm):
             )
 
 class DisponibiliteForm(forms.ModelForm):
-    class Meta ():
+    class Meta :
         model = Disponibilite
         fields = (
             'jour',
             'heure_debut',
             'heure_fin',
             )
+
+class UploadProfilePhotoForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('photo_de_profil', )

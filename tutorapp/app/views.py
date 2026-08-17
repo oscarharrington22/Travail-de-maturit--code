@@ -95,7 +95,7 @@ def demande_lecon (request, user_id):
 
     if request.method == 'POST':
         form = DemandeLeconForm(request.POST)
-        if form.is_valid :
+        if form.is_valid ():
             demande = form.save(commit=False)
             demande.eleve = request.user
             demande.prof = prof
@@ -157,4 +157,4 @@ def supprimer_demande(request, demande_id):
 
     demande.delete()
 
-    return redirect("mes_demandes")
+    return redirect("mes_demandes_envoyees")

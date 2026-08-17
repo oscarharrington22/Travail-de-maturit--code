@@ -21,6 +21,9 @@ from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordCha
 import authentication.views
 import app.views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -40,15 +43,16 @@ urlpatterns = [
 
     path('home/', app.views.home, name='home'),
     path('mon-compte/', app.views.mon_compte, name='mon_compte'),
-    path('modifier-mon-compte/', app.views.modifier_compte, name='modifer_compte'),
+    path('modifier-mon-compte/', app.views.modifier_compte, name='modifier_compte'),
+    path('profile-photo-upload', authentication.views.upload_profile_photo,name='upload_profile_photo'),
 
     path('recherche/', app.views.recherche, name='recherche'),
     path('profil/<int:user_id>/', app.views.profil, name='profil'),
     path('demande-lecon/<int:user_id>/', app.views.demande_lecon, name = 'demande_lecon'),
 
-    path('mes-disponibilites', authentication.views.mes_disponibilites, name = 'mes_disponibilites'),
-    path('nouvelle-disponibilite', authentication.views.nouvelle_disponibilite, name = 'nouvelle_disponibilite'),
-    path('supprimer-disponibilite/<int:id>', authentication.views.supprimer_disponibilite, name='supprimer_disponibilite'),
+    path('mes-disponibilites/', authentication.views.mes_disponibilites, name = 'mes_disponibilites'),
+    path('nouvelle-disponibilite/', authentication.views.nouvelle_disponibilite, name = 'nouvelle_disponibilite'),
+    path('supprimer-disponibilite/<int:id>/', authentication.views.supprimer_disponibilite, name='supprimer_disponibilite'),
 
     path('mes-demandes-envoyees/', app.views.mes_demandes_envoyees, name = 'mes_demandes_envoyees'),
     path('mes-demandes-recues/', app.views.mes_demandes_recues, name = 'mes_demandes_recues'),
@@ -56,3 +60,7 @@ urlpatterns = [
     path('supprimer-demande/<int:demande_id>/',app.views.supprimer_demande,name='supprimer_demande'),
 
     ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

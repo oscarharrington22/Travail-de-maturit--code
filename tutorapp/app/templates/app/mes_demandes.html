@@ -3,7 +3,9 @@
 <header>
 
 <a href="{% url 'mes_demandes_envoyees' %}">[Demandes Envoyées]</a>
+{% if user.est_prof %}
 <a href="{% url 'mes_demandes_recues' %}">[Demandes Recues]</a>
+{% endif %}
 
 </header>
 
