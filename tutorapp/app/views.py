@@ -147,3 +147,14 @@ def repondre_demande(request, demande_id):
         "app/repondre_demande.html",
         {"form": form, "demande": demande}
     )
+
+@login_required
+def supprimer_demande(request, demande_id):
+    demande = DemandeLecon.objects.get(id=demande_id)
+
+    if demande.eleve != request.user and demande.prof != request.user:
+        return redirect("mes_demandes_envoyees")
+
+    demande.delete()
+
+    return redirect("mes_demandes")

@@ -52,6 +52,7 @@ urlpatterns = [
 
     path('mes-demandes-envoyees/', app.views.mes_demandes_envoyees, name = 'mes_demandes_envoyees'),
     path('mes-demandes-recues/', app.views.mes_demandes_recues, name = 'mes_demandes_recues'),
-    path('repondre-demande/<int:demande_id>/', app.views.repondre_demande, name = 'repondre_demande')
+    path('repondre-demande/<int:demande_id>/', app.views.repondre_demande, name = 'repondre_demande'),
+    path('supprimer-demande/<int:demande_id>/',app.views.supprimer_demande,name='supprimer_demande'),
 
     ]

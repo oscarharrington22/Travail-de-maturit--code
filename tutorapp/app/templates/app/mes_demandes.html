@@ -15,13 +15,15 @@
     <br>Date : {{ demande.date }}
     <br>Heure : {{ demande.heure }}
     <br>Lieu : {{ demande.lieu}}
-    <br>Statut : {{ demande.statut }}
+    <br>Statut : {{ demande.get_statut_display }}
 
     {% if demande.statut == "en_attente" and demande.prof == request.user %}
         <br>
         <a href="{% url 'repondre_demande' demande.id %}">[Répondre à la demande]</a>
     {% endif %}
-    </p>
+    {% if demande.eleve == request.user or demande.prof == request.user %}
+        <br><a href="{% url 'supprimer_demande' demande.id %}">[Supprimer]</a>
+    {% endif %}</p>
 
 {% endfor %}
 
