@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Recherche de répétiteurs</h2>
-<a href="{% url 'home' %}">[Retour à l'aceuil]</a>
 
 <form method="get">
     {{ form.as_p }}
@@ -28,4 +27,5 @@
     <br>Adresse électronique : {{ repetiteur.email }}</p>
 
 {% endfor %}
+    <br><a href="{% url 'recherche' %}">[Retour au haut de la page]</a>
 {% endblock content %}

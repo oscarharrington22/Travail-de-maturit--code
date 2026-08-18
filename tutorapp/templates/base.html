@@ -1,12 +1,18 @@
 <html>
     <head>
         <title>Tutorapp</title>
-    </head>
-    <body>
         <h1>Tutorapp</h1>
         {% if user.is_authenticated %}
-            <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">[Se déconnecter]</a></p>
+            <a href="{% url 'home' %}">[Accueil]</a>
+            <a href="{% url 'recherche' %}">[Trouver un répetiteur]</a>
+            <a href="{% url 'mon_compte' %}">[Voir mon compte]</a>
+            <a href="{% url 'mes_demandes_envoyees' %}">[Mes demandes]</a>
+            {% if user.est_prof %}
+                <a href="{% url 'mes_disponibilites' %}">[Mes disponibilités]</a>
+            {% endif %}
+            <a href="{% url 'logout' %}">[Se déconnecter]</a>
         {% endif %}
-        {% block content %}{% endblock content %}
-    </body>
+    </head>
+{% block content %}
+{% endblock content %}
 </html>

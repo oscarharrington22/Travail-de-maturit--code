@@ -27,7 +27,7 @@ def upload_profile_photo(request):
         form = forms.UploadProfilePhotoForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('mon_compte')
     return render(request, 'authentication/upload_profile_photo.html', context={'form': form})
 
 @login_required
@@ -41,7 +41,7 @@ def mes_disponibilites(request):
 @login_required
 def nouvelle_disponibilite(request):
     if request.method == 'POST':
-        form = DisponibiliteForm(request.POST)
+        form = forms.DisponibiliteForm(request.POST)
         if form.is_valid():
             creneau = form.save(commit=False)
             creneau.prof = request.user
@@ -49,7 +49,7 @@ def nouvelle_disponibilite(request):
             return redirect('mes_disponibilites')
         
     else:
-        form = DisponibiliteForm()
+        form = forms.DisponibiliteForm()
     
     return render(request, 'authentication/nouvelle_disponibilite.html', {'form' : form})
 

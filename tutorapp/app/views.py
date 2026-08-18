@@ -50,6 +50,9 @@ def recherche (request):
         jour = form.cleaned_data['jour']
         heure = form.cleaned_data['heure']
 
+        if request.user.est_prof:
+            repetiteurs_liste = repetiteurs_liste.exclude(id=request.user.id)
+        
         if ville:
             repetiteurs_liste = repetiteurs_liste.filter(ville=ville)
 

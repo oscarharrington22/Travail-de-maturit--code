@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% block content %}
 <h2>Nouveau créneau</h2>
 <form method="post">
@@ -6,5 +8,7 @@
 
     <button type="submit">Créer</button>
 </form>
-
+{% if user.est_prof %}
+    <a href="{% url 'mes_disponibilites' %}">[Retour]</a>
+{% endif %}
 {% endblock content %}
