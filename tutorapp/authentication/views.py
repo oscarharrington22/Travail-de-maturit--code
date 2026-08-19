@@ -14,11 +14,32 @@ def signup_page(request):
 
     if request.method == 'POST':
         form = forms.SignupForm(request.POST)
+
+        if form.is_valid():
+
+            if user.est_prof:
+                return redirect('signup_prof')
+
+            user = form.save()
+            login(request, user) 
+            return redirect(settings.LOGIN_REDIRECT_URL)
+
+    return render(request, 'authentication/signup.html', context={'form': form})
+
+@login_required
+def signup_prof(request):
+    form = forms.SignupProfForm()
+
+    if request.method == 'POST':
+        form = forms.SignupProfForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user) 
             return redirect(settings.LOGIN_REDIRECT_URL)
-    return render(request, 'authentication/signup.html', context={'form': form})
+
+    return render(request, 'authentication/signup_prof.html', context={'form': form})
+
+
 @login_required
 def upload_profile_photo(request):
     form = forms.UploadProfilePhotoForm(instance=request.user)

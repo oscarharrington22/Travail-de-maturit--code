@@ -31,6 +31,7 @@ urlpatterns = [
             template_name='authentication/login.html',
             redirect_authenticated_user=True), name='login'),
     path('signup/', authentication.views.signup_page, name='signup'),
+    path('signup_prof/', authentication.views.signup_prof, name='signup_prof'),
     path('logout/', authentication.views.logout_user, name='logout'),
 
     path('change-password/', PasswordChangeView.as_view(
@@ -44,6 +45,7 @@ urlpatterns = [
     path('home/', app.views.home, name='home'),
     path('mon-compte/', app.views.mon_compte, name='mon_compte'),
     path('modifier-mon-compte/', app.views.modifier_compte, name='modifier_compte'),
+    path('modifier-mon-compte-prof/', app.views.modifier_compte_prof, name='modifier_compte_prof'),
     path('profile-photo-upload', authentication.views.upload_profile_photo,name='upload_profile_photo'),
 
     path('recherche/', app.views.recherche, name='recherche'),

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from authentication.models import Disponibilite
+from authentication.models import User, Disponibilite
 
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -14,9 +14,15 @@ class SignupForm(UserCreationForm):
             'age',
             'ville', 
             'est_prof', 
+            )
+
+class SignupProfForm(forms.ModelForm):
+    class Meta :
+        model = User
+        fields = (
             'sujets_prof', 
             'niveau_etudes',
-            'tarif' 
+            'tarif',
             )
 
 class DisponibiliteForm(forms.ModelForm):

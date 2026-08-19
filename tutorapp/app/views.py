@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from authentication.models import User, Disponibilite
+
+from authentication.forms import SignupProfForm
 from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm, StatutDemandeForm
 from app.models import DemandeLecon
 
@@ -25,10 +27,32 @@ def modifier_compte(request):
 
         if form.is_valid():
             form.save()
+            if user.est_prof:
+                return redirect('modifier_compte_prof')
             return redirect('mon_compte')
 
     else:
         form = ModifierCompteForm(instance=user)
+
+    return render(
+        request,
+        'app/modifier_compte.html',
+        {'form': form}
+    )
+
+@login_required
+def modifier_compte_prof(request):
+    user = request.user
+
+    if request.method == "POST":
+        form =SignupProfForm(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('mon_compte')
+
+    else:
+        form = SignupProfForm(instance=user)
 
     return render(
         request,

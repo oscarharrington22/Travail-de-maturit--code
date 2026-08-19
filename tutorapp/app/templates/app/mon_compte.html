@@ -21,6 +21,9 @@
 <br>Bibliographie personelle : {{ user.bibliographie}}</p>
 
 <a href="{% url 'change_password' %}">[Modifier mon mot de passe]</a>
+{% if user.est_prof%}
+    <a href="{% url 'modifier_compte_prof' %}">[Modifier les données comme repetiteur de mon compte]</a> 
+{% endif %}
 <a href="{% url 'modifier_compte' %}">[Modifier les données de mon compte]</a> 
 <a href="{% url 'upload_profile_photo' %}">[Modifier ma photo de profil]</a> 
 <br> <a href="{% url 'home' %}">[Retour à l'aceuil]</a>
