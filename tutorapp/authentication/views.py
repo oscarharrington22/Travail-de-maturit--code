@@ -16,25 +16,24 @@ def signup_page(request):
         form = forms.SignupForm(request.POST)
 
         if form.is_valid():
-
+            user = form.save()
+            login(request, user) 
+            
             if user.est_prof:
                 return redirect('signup_prof')
 
-            user = form.save()
-            login(request, user) 
             return redirect(settings.LOGIN_REDIRECT_URL)
 
     return render(request, 'authentication/signup.html', context={'form': form})
 
 @login_required
 def signup_prof(request):
-    form = forms.SignupProfForm()
+    form = forms.SignupProfForm(instance=request.user)
 
     if request.method == 'POST':
         form = forms.SignupProfForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user) 
+            form.save()
             return redirect(settings.LOGIN_REDIRECT_URL)
 
     return render(request, 'authentication/signup_prof.html', context={'form': form})

@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Inscription</h2>
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >S’inscrire</button>
-    </form>
+
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
+
+    <div class="w3-container w3-margin-top w3-margin-bottom">
+        <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 70% ;margin: auto;">
+            
+            <h2 class="w3-center"> Inscription </h2>
+
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+
+            <form method="post" class="w3-container w3-padding">
+                {{ form.as_p }}
+                {% csrf_token %}
+
+            <div class="w3-center">
+                <button type="submit" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue" >S’inscrire</button>
+            </div>   
+
+            </form>
+        </div>
+    </div>
 {% endblock content %}

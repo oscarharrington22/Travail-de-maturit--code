@@ -2,12 +2,22 @@
 
 {% block content %}
 
-<h2>Informations sur votre activité de professeur</h2>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Terminer l'inscription</button>
-</form>
+    <div class="w3-container w3-margin-top w3-margin-bottom">
+        <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 70% ;margin: auto;">
+            <h2 class="w3-center">Informations sur votre activité de professeur</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="w3-center">
+                    <button type="submit" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue" >S’inscrire</button>
+                </div> 
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}

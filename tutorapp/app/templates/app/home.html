@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Bienvenue sur Tutorapp !</h2>
-<p>Vous êtes connecté en tant que {{user.username}}</p>
-<p>Trouvez un répétiteur adapté à vos besoins, proposez vos services en tant que répétiteur, ou faites même les deux à la fois!</p>
-{% endblock content %}
+<head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
+
+    <div class="w3-container w3-padding w3-center">
+        <h2>Bienvenue sur Tutorapp !</h2>
+        <p>Vous êtes connecté en tant que {{user.username}}</p>
+        <p>Trouvez un répétiteur adapté à vos besoins, proposez vos services en tant que répétiteur, ou faites même les deux à la fois!</p>
+    </div>
+        {% endblock content %}

@@ -23,7 +23,7 @@ class User (AbstractUser):
         blank=True
         )
     age = models.PositiveIntegerField(
-        default=10, 
+        default=18, 
         validators=[MinValueValidator(1), MaxValueValidator(100)], 
         verbose_name='Âge'
         )

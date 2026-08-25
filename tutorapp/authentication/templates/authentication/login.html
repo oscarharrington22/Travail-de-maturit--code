@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Se connecter</button>
-    </form>
-    <p>Pas encore membre ? <a href="{% url 'signup' %}">[Inscrivez-vous maintenant !]</a></p>
-    
+
+<div class="w3-container w3-margin-top">
+    <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 45%; margin: auto;">
+        <h3 class="w3-center">Connexion</h3>
+        <form method="post" class="w3-container w3-padding">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue">Se connecter</button>
+        </form>
+
+        <div class="w3-container w3-padding">
+            <p>Pas encore membre ? <a href="{% url 'signup' %}" class="w3-text-blue">Inscrivez-vous maintenant !</a></p>
+        </div>
+    </div>
+</div>
 {% endblock content %}
