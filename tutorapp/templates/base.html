@@ -1,25 +1,27 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <title>TutorApp</title>
     </head>
 
     <body class="w3-light-grey">
 
-        <div class="w3-container w3-cobalt w3-center w3-padding">
+        <div class="w3-container w3-indigo w3-center w3-padding">
             <h1>TutorApp</h1>
         </div>
         {% if user.is_authenticated %}
-            <div class="w3-container w3-light-grey w3-center w3-padding">
+            <div class="w3-container w3-light-grey w3-center w3-padding-16">
 
-            <a href="{% url 'home' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue ">Accueil</a>
-            <a href="{% url 'recherche' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue ">Trouver un répetiteur</a>
-            <a href="{% url 'mon_compte' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue ">Voir mon compte</a>
-            <a href="{% url 'mes_demandes_envoyees' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue ">Mes demandes</a>
-            {% if user.est_prof %}
-                <a href="{% url 'mes_disponibilites' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue ">Mes disponibilités</a>
-            {% endif %}
-            <a href="{% url 'logout' %}" class="w3-button w3-crimson w3-round-xxlarge w3-hover-red " >Se déconnecter</a>
+                <a href="{% url 'home' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover"><i class="fa fa-home"></i> Acceuil</a>
+                <a href="{% url 'recherche' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover "> <i class="fa fa-search"></i> Recherche</a>
+                <a href="{% url 'mon_compte' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover "><i class="fa fa-user"></i> Mon compte</a>
+                <a href="{% url 'mes_demandes_envoyees' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover"><i class="fa fa-envelope"></i> Demandes</a>
+                {% if user.est_prof %}
+                    <a href="{% url 'mes_disponibilites' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover"><i class="fa fa-calendar"></i> Disponibilités</a>
+                {% endif %}
+                <a href="{% url 'logout' %}" class="w3-button w3-crimson w3-round-xxlarge w3-hover-red" > <i class="fa fa-sign-out"></i> Déconnection</a>
 
             </div>
         {% endif %}

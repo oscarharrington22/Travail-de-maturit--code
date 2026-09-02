@@ -3,59 +3,60 @@
 
     <head>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
-    <div class="w3-container w3-margin-top w3-margin-bottom">
+    <div class="w3-container ">
         
         <h2>Recherche de répétiteurs</h2>
         <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 40% ;">
             <h3>Filtres :</h3>
             <form method="get">
                 {{ form.as_p }}
-                <button type="submit">Rechercher</button>
+                <button type="submit" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-search"></i></button>
             </form>
         </div>
 
 
-    <ul class="w3-ul w3-margin-top">
-    {% for repetiteur in repetiteurs_liste %}   
-        <li class="w3-card-2 w3-margin-bottom w3-padding">
-            <div class="w3-bar">
-                <div class="w3-bar-item" style="width:125px">
-                    {% if repetiteur.photo_de_profil %}
-                        <img src="{{ repetiteur.photo_de_profil.url }}"
-                             class="w3-circle w3-hide-small w3-border"
-                             style="width:100px; height:100px; object-fit:cover;">
-                    {% else %}
-                        <img src="https://www.svgrepo.com/show/452030/avatar-default.svg"
-                            class="w3-circle w3-hide-small w3-border"
-                            style="width:100px; height:100px; object-fit:cover;">
-                    {% endif %}
-                </div>
+        <ul class="w3-ul w3-margin-top">
+        {% for repetiteur in repetiteurs_liste %}   
+            <li class="w3-card-2 w3-margin-bottom">
+                <div class="w3-bar">
+                    <div class="w3-bar-item" style="width:125px">
+                        {% if repetiteur.photo_de_profil %}
+                            <img src="{{ repetiteur.photo_de_profil.url }}"
+                                class="w3-circle w3-hide-small w3-border"
+                                style="width:85px; height:85px; object-fit:cover;">
+                        {% else %}
+                            <img src="https://www.svgrepo.com/show/452030/avatar-default.svg"
+                                class="w3-circle w3-hide-small w3-border"
+                                style="width:100px; height:100px; object-fit:cover;">
+                        {% endif %}
+                    </div>
 
-                <div class="w3-bar-item">
-                    <h4>
-                        <a href="{% url 'profil' repetiteur.id %}" class="w3-text-blue">
-                            {{ repetiteur.first_name }} {{ repetiteur.last_name }}
-                        </a>
-                    </h4>
-                    <p>
-                        Âge : {{ repetiteur.age }} ans<br>
-                        Ville : {{ repetiteur.ville }}<br>
-                        Tarif : {{ repetiteur.tarif }} CHF/h<br>
-                        Niveau d'études : {{ repetiteur.niveau_etudes }}<br>
-                        Matière(s) :
-                        {% for sujet in repetiteur.sujets_prof.all %}
-                            {{ sujet.nom }},
-                        {% endfor %}
-                    </p>
+                    <div class="w3-bar-item">
+                        <h4>
+                            <a href="{% url 'profil' repetiteur.id %}" class="w3-text-indigo">
+                                {{ repetiteur.first_name }} {{ repetiteur.last_name }}
+                            </a>
+                        </h4>
+                        <p>
+                            <b>Âge : </b>{{ repetiteur.age }} ans<br>
+                            <b>Ville : </b>{{ repetiteur.ville }}<br>
+                            <b>Tarif : </b>{{ repetiteur.tarif }} CHF/h<br>
+                            <b>Niveau d'études : </b>{{ repetiteur.niveau_etudes }}<br>
+                            <b>Matière(s) :</b>
+                            {% for sujet in repetiteur.sujets_prof.all %}
+                                {{ sujet.nom }},
+                            {% endfor %}
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </li>
-    {% endfor %}
-    </ul>
-            <div class="w3-center">
-                <br><a href="{% url 'recherche' %}" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue">Retour au haut de la page</a>
+            </li>
+        {% endfor %}
+        </ul>
+            <div class="w3-center w3-margin-bottom">
+                <br><a href="{% url 'recherche' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour au haut de la page</a>
             </div>
     </div>
 

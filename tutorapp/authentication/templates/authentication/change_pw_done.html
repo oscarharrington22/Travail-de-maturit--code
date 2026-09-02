@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Mot de passe modifié avec succès !</h2>
-    <a href="{% url 'home' %}">[Retour à l'accueil]</a> <br>
-    <a href="{% url 'mon_compte' %}">[Retour à mon compte]</a>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
+    <div class="w3-container w3-padding w3-center">
+        <h2>Mot de passe modifié avec succès !</h2>
+        <a href="{% url 'home' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour à l'accueil</a>
+        <a href="{% url 'mon_compte' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour à mon compte</a>
+    </div>
 {% endblock content %}
+ 

@@ -6,14 +6,15 @@ class ModifierCompteForm(forms.ModelForm):
    class Meta:
      model = User
      fields = (
+        "email",
         "first_name",
         "last_name",
+        "age",
         "ville",
         "bibliographie",
-        "est_prof",
-        "tarif",
-        "niveau_etudes",
-        "sujets_prof",)
+        "est_prof"
+        
+        )
 
 class RechercheForm (forms.Form):
     matiere = forms.ModelChoiceField(
@@ -40,9 +41,10 @@ class RechercheForm (forms.Form):
         )
 
     jour = forms.ChoiceField(
-        choices=Disponibilite.JOURS,
+        choices=[('','------')] + Disponibilite.JOURS,
         required=False,
-        label="Jour"
+        label="Jour",
+        initial='',
         )
 
     heure = forms.TimeField(

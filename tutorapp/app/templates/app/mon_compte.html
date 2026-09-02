@@ -1,32 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2> {{ user.first_name }} {{ user.last_name }} - {{ user.username }}</h2>
-{% if user.photo_de_profil %}
-<img src="{{ user.photo_de_profil.url }}" alt="Photo de profil" width="150" height="200">
-{% else %}
-    <p>Aucune photo de profil</p>
-{% endif %}
-<p>Âge : {{ user.age }} ans
-<br>Ville : {{ user.ville }}
-<br>Tarif : {{ user.tarif }}
-<br>Niveau d'études : {{ user.niveau_etudes }}
-<br>Matère(s) :
 
-<ul>
-    {% for sujet in user.sujets_prof.all %}
-        <li>{{ sujet.nom }}</li>
-    {% endfor %}
-</ul>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
-<br>Bibliographie personelle : {{ user.bibliographie}}</p>
+    <div class="w3-card-2 w3-padding w3-margin">  
+        <div class="w3-bar">
+            <div class="w3-bar-item">
+                {% if user.photo_de_profil %}
+                    <img src="{{ repetiteur.photo_de_profil.url }}"
+                        class="w3-circle w3-hide-small w3-border"
+                        style="width:100px; height:100px; object-fit:cover;">
+                {% else %}
+                    <img src="https://www.svgrepo.com/show/452030/avatar-default.svg"
+                        class="w3-circle w3-hide-small w3-border"
+                        style="width:100px; height:100px; object-fit:cover;">
+                {% endif %}
+            </div>
+            <h2 class="w3-bar-item"> {{ user.first_name }} {{ user.last_name }} - {{ user.username }}</h2>
+        </div>
 
-<a href="{% url 'change_password' %}">[Modifier mon mot de passe]</a>
-{% if user.est_prof%}
-    <a href="{% url 'modifier_compte_prof' %}">[Modifier les données comme repetiteur de mon compte]</a> 
-{% endif %}
-<a href="{% url 'modifier_compte' %}">[Modifier les données de mon compte]</a> 
-<a href="{% url 'upload_profile_photo' %}">[Modifier ma photo de profil]</a> 
-<br> <a href="{% url 'home' %}">[Retour à l'aceuil]</a>
+        <p>
+            <b>Âge : </b>{{ user.age }} ans<br>
+            <b>Ville : </b>{{ user.ville }}<br>
+            {% if user.est_prof %}
+                <b>Tarif : </b>{{ user.tarif }} CHF/h<br>
+                <b>Niveau d'études : </b>{{ user.niveau_etudes }}<br>
+                <b>Matière(s) :</b>
+                <ul>
+                    {% for sujet in user.sujets_prof.all %}
+                        <li>{{ sujet.nom }}</li>
+                    {% endfor %}
+                </ul>
+                <b>Bibliographie : </b>
+                {% if user.bibliographie %} 
+                    <br> {{ user.bibliographie }}
+                {% else %}
+                    <br> Pas de bibliographie personelle
+                {% endif %}<br>
+            {% else %}
+                <b>Peut donner des cours :</b> Non
+            {% endif %}
+            <b>Adresse électronique : </b>{{ user.email }}
+        </p>
+    </div>
 
-
+    <div class="w3-container w3-light-grey w3-center w3-padding-16">
+        <a href="{% url 'change_password' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Mot de passe</a>
+                <a href="{% url 'modifier_compte' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Mon compte</a> 
+        {% if user.est_prof%}
+            <a href="{% url 'modifier_compte_prof' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Compte repetiteur</a> 
+        {% endif %}
+        <a href="{% url 'upload_profile_photo' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Photo de profil </a>
+    </div> 
+    
 {% endblock content %}

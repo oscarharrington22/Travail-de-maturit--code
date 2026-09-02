@@ -1,34 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2> {{repetiteur.first_name}} {{repetiteur.last_name}}</h2>
-{% if repetiteur.photo_de_profil %}
-    <img src="{{ repetiteur.photo_de_profil.url }}"
-         alt="Photo de profil"
-         width="150">
-{% else %}
-    <p>Aucune photo de profil</p>
-{% endif %}
-<p>Âge : {{repetiteur.age}} ans
-<br>Ville : {{ repetiteur.ville }}
-<br>Tarif : {{ repetiteur.tarif }}
-<br>Niveau d'études : {{ repetiteur.niveau_etudes }}
-<br>Matère(s) :
-<ul>
-    {% for sujet in repetiteur.sujets_prof.all %}
-        <li>{{ sujet.nom }}</li>
-    {% endfor %}
-</ul>
-<br>Bibliographie : <br> {{ repetiteur.bibliographie }}</p>
-<br>Adresse électronique : {{ repetiteur.email }}
-<br>Disponibilités : 
-<ul>{% for disponibilite in disponibilite_liste %}
-    <li>{{disponibilite.jour}} de {{disponibilite.heure_debut}} à {{disponibilite.heure_fin}}</li>
-    {%endfor %}</ul>
-</p>
 
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
 
-<a href="{% url 'demande_lecon' repetiteur.id %}">[Demander une leçon]</a> <br>
+    <div class="w3-container w3-margin-bottom w3-center">
+        <a href="{% url 'recherche' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour à la liste de repetiteurs</a>
+    </div>
 
-<a href="{% url 'recherche' %}">[Retour à la liste de repetiteurs]</a>
+    <div class="w3-card-2 w3-padding w3-margin">  
+        <div class="w3-bar">
+            <div class="w3-bar-item">
+                {% if repetiteur.photo_de_profil %}
+                    <img src="{{ repetiteur.photo_de_profil.url }}"
+                        class="w3-circle w3-hide-small w3-border"
+                        style="width:100px; height:100px; object-fit:cover;">
+                {% else %}
+                    <img src="https://www.svgrepo.com/show/452030/avatar-default.svg"
+                        class="w3-circle w3-hide-small w3-border"
+                        style="width:100px; height:100px; object-fit:cover;">
+                {% endif %}
+            </div>
+
+            <h2 class="w3-bar-item "> {{repetiteur.first_name}} {{repetiteur.last_name}}</h2>
+        </div>
+        
+        <p>
+            <b>Âge : </b>{{ repetiteur.age }} ans<br>
+            <b>Ville : </b>{{ repetiteur.ville }}<br>
+            <b>Tarif : </b>{{ repetiteur.tarif }} CHF/h<br>
+            <b>Niveau d'études : </b>{{ repetiteur.niveau_etudes }}<br>
+            <b>Matière(s) :</b>
+            <ul>
+                {% for sujet in repetiteur.sujets_prof.all %}
+                    <li>{{ sujet.nom }}</li>
+                {% endfor %}
+            </ul>
+            </ul>
+            <b>Bibliographie : </b>
+            {% if repetiteur.bibliographie %} 
+                <br> {{ repetiteur.bibliographie }}
+            {% else %}
+                <br> Pas de bibliographie personelle
+            {% endif %}<br>
+            <b>Disponibilités : </b>
+            {% if disponibilite_liste %} 
+                <ul>
+                    {% for disponibilite in disponibilite_liste %}
+                        <li>{{disponibilite.get_jour_display}} de {{disponibilite.heure_debut}} à {{disponibilite.heure_fin}}</li>
+                    {%endfor %}
+                </ul>
+            {% else %}
+                <br> Aucune disponibilite<br>
+            {% endif %}
+            <b>Adresse électronique : </b>{{ repetiteur.email }}
+        </p>
+    </div>
+
+    <div class="w3-container w3-padding w3-margin-top w3-center">
+        <a href="{% url 'demande_lecon' repetiteur.id %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Demander une leçon</a>
+    </div>
 
 {% endblock content %}

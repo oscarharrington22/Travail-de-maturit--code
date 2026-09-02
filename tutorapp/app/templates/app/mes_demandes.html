@@ -1,32 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<header>
+    <header>
 
-<a href="{% url 'mes_demandes_envoyees' %}">[Demandes Envoyées]</a>
-{% if user.est_prof %}
-<a href="{% url 'mes_demandes_recues' %}">[Demandes Recues]</a>
-{% endif %}
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <div class="w3-container w3-light-grey w3-center w3-padding-16">
+            <a href="{% url 'mes_demandes_envoyees' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue ">Demandes Envoyées</a>
+            {% if user.est_prof %}
+            <a href="{% url 'mes_demandes_recues' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue ">Demandes Recues</a>
+            {% endif %}
+        </div>
 
-</header>
+    </header>
+    <div class="w3-container ">
+        <ul class="w3-ul w3-margin-top">
+        {% for demande in demandes_liste %}
+            <li class="w3-card-2 w3-margin-bottom">
+                <p><h3>Cours de {{ demande.matiere }}</h3> 
+                Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
+                <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
+                <br>Date : {{ demande.date }}
+                <br>Heure : {{ demande.heure }}
+                <br>Lieu : {{ demande.lieu}}
+                <br>Statut : {{ demande.get_statut_display }}</p>
 
-{% for demande in demandes_liste %}
-
-    <p><h3>Cours de {{ demande.matiere }}</h3> 
-    Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
-    <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
-    <br>Date : {{ demande.date }}
-    <br>Heure : {{ demande.heure }}
-    <br>Lieu : {{ demande.lieu}}
-    <br>Statut : {{ demande.get_statut_display }}
-
-    {% if demande.statut == "en_attente" and demande.prof == request.user %}
-        <br>
-        <a href="{% url 'repondre_demande' demande.id %}">[Répondre à la demande]</a>
-    {% endif %}
-    {% if demande.eleve == request.user or demande.prof == request.user %}
-        <br><a href="{% url 'supprimer_demande' demande.id %}">[Supprimer]</a>
-    {% endif %}</p>
-
-{% endfor %}
+                {% if demande.statut == "en_attente" and demande.prof == request.user %}
+                    <a href="{% url 'repondre_demande' demande.id %}" class="w3-button w3-small w3-indigo w3-round-xxlarge w3-hover-light-blue">Répondre</a>
+                {% endif %}
+                {% if demande.eleve == request.user or demande.prof == request.user %}
+                    <a href="{% url 'supprimer_demande' demande.id %}" class="w3-button w3-crimson w3-round-xxlarge w3-hover-red" ><i class="fa fa-trash"></i></a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

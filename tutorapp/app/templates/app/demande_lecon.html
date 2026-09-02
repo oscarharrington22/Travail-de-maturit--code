@@ -2,15 +2,21 @@
 
 {% block content %}
 
-<h2>Demander une leçon à {{ prof.first_name }} {{ prof.last_name }}</h2>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
 
-<form method="post">
-    {% csrf_token %}
+    <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 70%; margin: auto;">
+        <h2 class="w3-center">Demander une leçon à {{ prof.first_name }} {{ prof.last_name }}</h2>
 
-    {{ form.as_p }}
-
-    <button type="submit">Envoyer la demande</button>
-</form>
-<a href="{% url 'profil' prof.id %}"> [Retour]</a>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Envoyer la demande</button>
+        </form>
+    </div>
+    <div class="w3-center w3-padding-16">
+        <a href="{% url 'profil' prof.id %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> Retour</a>
+    </div>
 
 {% endblock content %}

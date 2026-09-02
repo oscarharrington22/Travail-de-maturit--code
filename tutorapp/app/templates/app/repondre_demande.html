@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="w3-container w3-margin-top">
+        <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 45%; margin: auto;">
+            <h2 class="w3-center">Répondre à la demande</h2>
 
-<h2>Répondre à la demande</h2>
+            <p>
+                Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
+                <br>Matière : {{ demande.matiere.nom }}
+                <br>Date : {{ demande.date }}
+                <br>Heure : {{ demande.heure }}
+            </p>
 
-<p>
-    Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
-    <br>Matière : {{ demande.matiere.nom }}
-    <br>Date : {{ demande.date }}
-    <br>Heure : {{ demande.heure }}
-</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Enregistrer</button>
+            </form>
+        </div>
+        <div class="w3-center w3-padding">
+            <a href="{% url 'mes_demandes_recues' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover" >Retour</a>
+        </div>
+        
+    </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enregistrer</button>
-</form>
-<a href="{% url 'mes_demandes_recues' %}">[Retour]</a>
 {% endblock %}

@@ -2,18 +2,22 @@
 
 {% block content %}
 
-<div class="w3-container w3-margin-top">
-    <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 45%; margin: auto;">
-        <h3 class="w3-center">Connexion</h3>
-        <form method="post" class="w3-container w3-padding">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit" class="w3-button w3-cobalt w3-round-xxlarge w3-hover-blue">Se connecter</button>
-        </form>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
 
-        <div class="w3-container w3-padding">
-            <p>Pas encore membre ? <a href="{% url 'signup' %}" class="w3-text-blue">Inscrivez-vous maintenant !</a></p>
+    <div class="w3-container w3-margin-top">
+        <div class="w3-card-4 w3-white w3-round-xlarge w3-padding w3-left-align" style="width: 45%; margin: auto;">
+            <h3 class="w3-center">Connexion</h3>
+            <form method="post" class="w3-container w3-padding">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="w3-button w3-emerald w3-round-xxlarge w3-hover-green">Se connecter</button>
+            </form>
+
+            <div class="w3-container w3-padding">
+                <p>Pas encore membre ? <a href="{% url 'signup' %}" class="w3-text-indigo">Inscrivez-vous maintenant !</a></p>
+            </div>
         </div>
     </div>
-</div>
-{% endblock content %}
+{% endblock content %} 
