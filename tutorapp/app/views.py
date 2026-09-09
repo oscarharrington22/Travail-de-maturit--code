@@ -17,6 +17,9 @@ def mon_compte(request):
         'app/mon_compte.html',
         {"user" : request.user}
         )
+@login_required
+def page_modification(request):
+    return render(request, 'app/page_modification.html')
 
 @login_required
 def modifier_compte(request):

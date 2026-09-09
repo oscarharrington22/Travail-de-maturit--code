@@ -44,6 +44,7 @@ urlpatterns = [
 
     path('home/', app.views.home, name='home'),
     path('mon-compte/', app.views.mon_compte, name='mon_compte'),
+    path('modifier/', app.views.page_modification, name='page_modification'),
     path('modifier-mon-compte/', app.views.modifier_compte, name='modifier_compte'),
     path('modifier-mon-compte-prof/', app.views.modifier_compte_prof, name='modifier_compte_prof'),
     path('profile-photo-upload', authentication.views.upload_profile_photo,name='upload_profile_photo'),

@@ -9,4 +9,9 @@
         <p>Vous êtes connecté en tant que {{user.username}}</p>
         <p>Trouvez un répétiteur adapté à vos besoins, proposez vos services en tant que répétiteur, ou faites même les deux à la fois!</p>
     </div>
+
+    <div class="w3-container w3-padding-16 w3-center">
+        <a href="{% url 'recherche' %}" class="w3-button w3-large w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-search"></i> Commencer à chercher</a>
+    </div>
+
         {% endblock content %}

@@ -17,6 +17,11 @@
             </form>
         </div>
 
+        {% if not repetiteurs_liste %}
+            <div class="w3-card-2 w3-margin-top">
+                <h2 class = w3-center w3-padding>Aucun répetiteur ne correspond à votre recherche </h2>
+            </div>
+        {% endif %}
 
         <ul class="w3-ul w3-margin-top">
         {% for repetiteur in repetiteurs_liste %}   
@@ -55,6 +60,7 @@
             </li>
         {% endfor %}
         </ul>
+
             <div class="w3-center w3-margin-bottom">
                 <br><a href="{% url 'recherche' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour au haut de la page</a>
             </div>

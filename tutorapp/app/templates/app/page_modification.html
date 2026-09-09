@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <div class="w3-container w3-padding-16 w3-center">
+        <h2> Modifier mon compte </h2>
+        <h4>Quelles données souhaitez vous modifier ?</h4>
+    </div>
+
+    <div class="w3-container w3-light-grey w3-center w3-padding-16">
+        <a href="{% url 'modifier_compte' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Profil</a> 
+        {% if user.est_prof%}
+            <a href="{% url 'modifier_compte_prof' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-graduation-cap"></i> Profil repetiteur</a> 
+        {% endif %}
+        <a href="{% url 'change_password' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-lock"></i> Mot de passe</a>
+        <a href="{% url 'upload_profile_photo' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-camera"></i> Photo de profil </a>
+    </div> 
+
+    <div class="w3-center w3-padding-16">
+        <a href="{% url 'mon_compte' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover">Retour</a>
+    </div>
+    
+{% endblock content %}

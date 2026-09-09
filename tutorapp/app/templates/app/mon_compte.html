@@ -48,12 +48,7 @@
     </div>
 
     <div class="w3-container w3-light-grey w3-center w3-padding-16">
-        <a href="{% url 'change_password' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Mot de passe</a>
-                <a href="{% url 'modifier_compte' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Mon compte</a> 
-        {% if user.est_prof%}
-            <a href="{% url 'modifier_compte_prof' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Compte repetiteur</a> 
-        {% endif %}
-        <a href="{% url 'upload_profile_photo' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Photo de profil </a>
+        <a href="{% url 'page_modification' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"> <i class="fa fa-pencil"></i> Modifier </a>
     </div> 
     
 {% endblock content %}

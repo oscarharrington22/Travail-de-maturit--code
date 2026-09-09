@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Mes disponibilités</h2>
 
-<ul>
-{% for creneau in disponibilites_liste %}
-<li>{{ creneau.jour }} de {{ creneau.heure_debut }} à {{ creneau.heure_fin }}
-    <a href="{% url 'supprimer_disponibilite' creneau.id %}">[Supprimer]</a>
-</li>
-{% endfor %}
-</ul>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
-<a href="{% url 'nouvelle_disponibilite' %}">[Ajouter un créneau de disponibilité]</a>
+    <div class="w3-container w3-padding-16">
+        <h2>Mes disponibilités : </h2>
+
+        {% if not disponibilites_liste %}
+                <p>Aucue disponibilité</p>
+        {% endif %}
+
+        <ul>
+        {% for creneau in disponibilites_liste %}
+        <li>{{creneau.get_jour_display}} de {{ creneau.heure_debut }} à {{ creneau.heure_fin }}
+            <a href="{% url 'supprimer_disponibilite' creneau.id %}" class="w3-text-red" ><i class="fa fa-trash"></i></a>
+        </li>
+        {% endfor %}
+        </ul>
+
+        <a href="{% url 'nouvelle_disponibilite' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue w3-small"><i class="fa fa-plus"></i></a>
+    </div>
 {% endblock content %}

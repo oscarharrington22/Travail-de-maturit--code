@@ -14,10 +14,21 @@
 
     </header>
     <div class="w3-container ">
+
+        {% if not demandes_liste %}
+            <div class="w3-center w3-padding-16">
+                <h2 class = w3-center w3-padding>Aucue demande</h2>
+            </div>
+        {% endif %}
+
         <ul class="w3-ul w3-margin-top">
         {% for demande in demandes_liste %}
             <li class="w3-card-2 w3-margin-bottom">
-                <p><h3>Cours de {{ demande.matiere }}</h3> 
+                <p><h3>Cours de {{ demande.matiere }}    
+                    {% if demande.eleve == request.user or demande.prof == request.user %}
+                        <a href="{% url 'supprimer_demande' demande.id %}" class="w3-text-red" ><i class="fa fa-trash"></i></a>
+                    {% endif %}
+                    </h3> 
                 Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
                 <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
                 <br>Date : {{ demande.date }}
@@ -27,9 +38,6 @@
 
                 {% if demande.statut == "en_attente" and demande.prof == request.user %}
                     <a href="{% url 'repondre_demande' demande.id %}" class="w3-button w3-small w3-indigo w3-round-xxlarge w3-hover-light-blue">Répondre</a>
-                {% endif %}
-                {% if demande.eleve == request.user or demande.prof == request.user %}
-                    <a href="{% url 'supprimer_demande' demande.id %}" class="w3-button w3-crimson w3-round-xxlarge w3-hover-red" ><i class="fa fa-trash"></i></a>
                 {% endif %}
             </li>
         {% endfor %}
