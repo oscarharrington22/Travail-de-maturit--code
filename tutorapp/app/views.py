@@ -6,7 +6,6 @@ from authentication.forms import SignupProfForm
 from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm, StatutDemandeForm
 from app.models import DemandeLecon
 
-@login_required
 def home(request):
     return render(request, 'app/home.html')
 
@@ -63,7 +62,7 @@ def modifier_compte_prof(request):
         {'form': form}
     )
 
-@login_required
+
 def recherche (request):
     form = RechercheForm(request.GET)
 
@@ -77,7 +76,7 @@ def recherche (request):
         jour = form.cleaned_data['jour']
         heure = form.cleaned_data['heure']
 
-        if request.user.est_prof:
+        if request.user.is_authenticated and request.user.est_prof:
             repetiteurs_liste = repetiteurs_liste.exclude(id=request.user.id)
         
         if ville:
@@ -107,7 +106,6 @@ def recherche (request):
             }
     )
 
-@login_required
 def profil (request, user_id):
     repetiteur = User.objects.get(id=user_id)
     disponibilite_liste = Disponibilite.objects.filter(prof=repetiteur)

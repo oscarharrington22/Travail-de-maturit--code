@@ -6,7 +6,11 @@
 
     <div class="w3-container w3-padding-16 w3-center">
         <h2>Bienvenue sur Tutorapp !</h2>
-        <p>Vous êtes connecté en tant que {{user.username}}</p>
+        {% if user.is_authenticated %}
+            <p>Vous êtes connecté en tant que {{user.username}}</p>
+        {% else %}
+            <p>Vous n'êtes pas connecté, <a href="{% url 'login' %}" class="w3-text-indigo">Connectez-vous maintenant !</a></p>
+        {% endif %}
         <p>Trouvez un répétiteur adapté à vos besoins, proposez vos services en tant que répétiteur, ou faites même les deux à la fois!</p>
     </div>
 
