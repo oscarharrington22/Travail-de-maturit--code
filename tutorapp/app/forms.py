@@ -17,6 +17,11 @@ class ModifierCompteForm(forms.ModelForm):
         )
 
 class RechercheForm (forms.Form):
+    last_name = forms.CharField(
+        required=False,
+        label="Nom"
+        )
+
     matiere = forms.ModelChoiceField(
         queryset= Sujet.objects.all(),
         required=False,
@@ -58,8 +63,10 @@ class DemandeLeconForm (forms.ModelForm):
         fields = (
             'matiere',
             'date',
-            'heure',
-            'lieu',)
+            'heure_debut',
+            'heure_fin',
+            'lieu',
+        )
 
 class StatutDemandeForm(forms.ModelForm):
     class Meta:

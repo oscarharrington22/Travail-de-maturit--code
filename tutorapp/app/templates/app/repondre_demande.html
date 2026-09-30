@@ -9,7 +9,8 @@
                 Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
                 <br>Matière : {{ demande.matiere.nom }}
                 <br>Date : {{ demande.date }}
-                <br>Heure : {{ demande.heure }}
+                <br>Heure de début : {{ demande.heure_debut }}
+                <br>Heure de fin : {{ demande.heure_fin }}
             </p>
 
             <form method="post">
@@ -19,6 +20,7 @@
             </form>
         </div>
         <div class="w3-center w3-padding">
+            <p class="w3-opacity">N'oubliez pas de mettre à jour vos disponibilités si vous acceptez plusieurs cours </p>
             <a href="{% url 'mes_demandes_recues' %}" class="w3-button w3-blue-gray w3-round-xxlarge w3-hover" >Retour</a>
         </div>
         

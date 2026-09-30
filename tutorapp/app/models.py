@@ -31,7 +31,9 @@ class DemandeLecon (models.Model):
 
     date = models.DateField(verbose_name='Date')
 
-    heure = models.TimeField(verbose_name='Heure')
+    heure_debut = models.TimeField(verbose_name='Heure de début')
+
+    heure_fin = models.TimeField(verbose_name='Heure de fin')
     
     lieu = models.CharField(verbose_name='Lieu', max_length=64)
 

@@ -8,7 +8,7 @@
         <div class="w3-container w3-light-grey w3-center w3-padding-16">
             <a href="{% url 'mes_demandes_envoyees' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue ">Demandes Envoyées</a>
             {% if user.est_prof %}
-            <a href="{% url 'mes_demandes_recues' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue ">Demandes Recues</a>
+            <a href="{% url 'mes_demandes_recues' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-blue ">Demandes Reçues</a>
             {% endif %}
         </div>
 
@@ -17,7 +17,7 @@
 
         {% if not demandes_liste %}
             <div class="w3-center w3-padding-16">
-                <h2 class = w3-center w3-padding>Aucue demande</h2>
+                <h2 class = w3-center w3-padding>Aucue demande {{variable_envoi_recu}}</h2>
             </div>
         {% endif %}
 
@@ -32,12 +32,13 @@
                 Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
                 <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
                 <br>Date : {{ demande.date }}
-                <br>Heure : {{ demande.heure }}
+                <br>Heure de début : {{ demande.heure_debut }}
+                <br>Heure de fin : {{ demande.heure_fin }}
                 <br>Lieu : {{ demande.lieu}}
                 <br>Statut : {{ demande.get_statut_display }}</p>
 
                 {% if demande.statut == "en_attente" and demande.prof == request.user %}
-                    <a href="{% url 'repondre_demande' demande.id %}" class="w3-button w3-small w3-indigo w3-round-xxlarge w3-hover-light-blue">Répondre</a>
+                    <a href="{% url 'repondre_demande' demande.id %}" class="w3-text-indigo">Répondre</a>
                 {% endif %}
             </li>
         {% endfor %}

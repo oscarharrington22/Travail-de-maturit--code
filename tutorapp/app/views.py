@@ -16,6 +16,7 @@ def mon_compte(request):
         'app/mon_compte.html',
         {"user" : request.user}
         )
+
 @login_required
 def page_modification(request):
     return render(request, 'app/page_modification.html')
@@ -26,6 +27,8 @@ def modifier_compte(request):
 
     if request.method == "POST":
         form = ModifierCompteForm(request.POST, instance=user)
+        #instance=user rempli le formulaire avec les donnée de l'instance user 
+        #ça permet de modifier les données déjà existantes
 
         if form.is_valid():
             form.save()
@@ -61,24 +64,33 @@ def modifier_compte_prof(request):
         'app/modifier_compte.html',
         {'form': form}
     )
+#deuxième formulaire d'incription qui sera appelé seulement si l'utilisateur coche qu'il est prof
 
 
 def recherche (request):
     form = RechercheForm(request.GET)
 
     repetiteurs_liste = User.objects.filter(est_prof=True)
+    #Prend tous les utilisateurs listés comme répétiteurs
+    #Cette liste va être filtrée puis envoyée au gabarit pour être affichée
 
     if form.is_valid():
+        last_name = form.cleaned_data["last_name"]
         ville = form.cleaned_data["ville"]
         matiere = form.cleaned_data["matiere"]
         tarif_max = form.cleaned_data["tarif_max"]
         niveau_etudes = form.cleaned_data["niveau_etudes"]
         jour = form.cleaned_data['jour']
         heure = form.cleaned_data['heure']
+        #cleaned_data récupère la valeur du champ indiqué pour pouvoir l'utiliser dans les filtres plus bas
 
         if request.user.is_authenticated and request.user.est_prof:
             repetiteurs_liste = repetiteurs_liste.exclude(id=request.user.id)
-        
+            #exclude permet d'exculre l'utilisateur de la liste 
+
+        if last_name:
+            repetiteurs_liste = repetiteurs_liste.filter(last_name=last_name)
+
         if ville:
             repetiteurs_liste = repetiteurs_liste.filter(ville=ville)
 
@@ -93,9 +105,11 @@ def recherche (request):
 
         if jour:
             repetiteurs_liste = repetiteurs_liste.filter(disponibilites__jour=jour)
+            #les 2 '__' indiquent qu'il faut aller checher le champ jour dans le modèle disponibilites 
 
         if heure:
             repetiteurs_liste = repetiteurs_liste.filter(disponibilites__heure_debut__lte=heure, disponibilites__heure_fin__gte=heure)
+            #lte signifie less then or equal (<=) et gte greater then or equal (>=)
 
     return render(
         request,
@@ -123,12 +137,44 @@ def demande_lecon (request, user_id):
 
     if request.method == 'POST':
         form = DemandeLeconForm(request.POST)
+
         if form.is_valid ():
             demande = form.save(commit=False)
             demande.eleve = request.user
             demande.prof = prof
-            demande.save()
-            return redirect("home")
+
+            jours = [
+                "lundi",
+                "mardi",
+                "mercredi",
+                "jeudi",
+                "vendredi",
+                "samedi",
+                "dimanche"
+            ]
+            #Liste de jours pour pouvoir utiliser l'indexe de .weekday
+            
+            jour = jours[demande.date.weekday()]
+
+            disponibilite = Disponibilite.objects.filter(
+                prof=prof,
+                jour=jour,
+                heure_debut__lte=demande.heure_debut,
+                heure_fin__gte=demande.heure_fin
+                ).exists()
+            #Vérifie s'il existe (fonction .exists()) une disponibilité à cette date entre les heures de disponibilité
+
+            if disponibilite:
+                demande.save()
+                return redirect("home")
+
+            else:
+                form.add_error(
+                    None,
+                    "Le répétiteur n'est pas disponible à cet horaire."
+                )
+                #Renvoye un message d'erreur s'il n'y a pas de disponibilité
+
     else :
         form = DemandeLeconForm()
 
@@ -144,14 +190,16 @@ def demande_lecon (request, user_id):
 @login_required
 def mes_demandes_envoyees (request) :
     demandes_liste = request.user.demandes_comme_eleve.all()
+    variable_envoi_recu = 'envoyée'
 
-    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
+    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste, 'variable_envoi_recu': variable_envoi_recu})
 
 @login_required
 def mes_demandes_recues (request) : 
     demandes_liste = request.user.demandes_comme_prof.all()
+    variable_envoi_recu = 'reçue'
 
-    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste})
+    return render (request, 'app/mes_demandes.html', {'demandes_liste' : demandes_liste, 'variable_envoi_recu': variable_envoi_recu})
 
 @login_required
 def repondre_demande(request, demande_id):
