@@ -18,7 +18,7 @@
         </div>
 
         {% if not repetiteurs_liste %}
-            <div class="w3-card-2 w3-margin-top">
+            <div class="w3-margin-top">
                 <h2 class = w3-center w3-padding>Aucun répetiteur ne correspond à votre recherche </h2>
             </div>
         {% endif %}
@@ -52,7 +52,7 @@
                             <b>Niveau d'études : </b>{{ repetiteur.niveau_etudes }}<br>
                             <b>Matière(s) :</b>
                             {% for sujet in repetiteur.sujets_prof.all %}
-                                {{ sujet.nom }},
+                                {{ sujet.nom }} 
                             {% endfor %}
                         </p>
                     </div>
@@ -65,7 +65,9 @@
                 {% if not user.is_authenticated %}
                     <a href="{% url 'home' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue"><i class="fa fa-home"></i> Retour à l'acceuil</a>
                 {% endif %}
-                <a href="{% url 'recherche' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour au haut de la page</a>
+                {% if repetiteurs_liste %}
+                    <a href="{% url 'recherche' %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Retour au haut de la page</a>
+                {% endif %}
             </div>
     </div>
 

@@ -6,6 +6,8 @@ from authentication.forms import SignupProfForm
 from .forms import RechercheForm, ModifierCompteForm, DemandeLeconForm, StatutDemandeForm
 from app.models import DemandeLecon
 
+from datetime import timedelta
+
 def home(request):
     return render(request, 'app/home.html')
 
@@ -138,11 +140,14 @@ def demande_lecon (request, user_id):
     if request.method == 'POST':
         form = DemandeLeconForm(request.POST)
 
+
         if form.is_valid ():
             demande = form.save(commit=False)
             demande.eleve = request.user
             demande.prof = prof
 
+            nombre_semaines = form.cleaned_data['nombre_semaines']
+            #utilisation d'une variable propre au formulaire pour créer le bon nombre de demandes
             jours = [
                 "lundi",
                 "mardi",
@@ -162,11 +167,21 @@ def demande_lecon (request, user_id):
                 heure_debut__lte=demande.heure_debut,
                 heure_fin__gte=demande.heure_fin
                 ).exists()
-            #Vérifie s'il existe (fonction .exists()) une disponibilité à cette date entre les heures de disponibilité
+                #Vérifie s'il existe (fonction .exists()) une disponibilité à cette date entre les heures de disponibilité
 
             if disponibilite:
-                demande.save()
-                return redirect("home")
+                for semaine in range(nombre_semaines):
+                    DemandeLecon.objects.create(
+                        eleve=request.user,
+                        prof=prof,
+                        matiere=demande.matiere,
+                        date=demande.date + timedelta(weeks=semaine),
+                        #timedelta sert à ajouter ou enlever un certain temps a une date (dans ce cas-ci, des semaines)
+                        heure_debut=demande.heure_debut,
+                        heure_fin=demande.heure_fin,
+                        lieu=demande.lieu
+                    )
+                return redirect("mes_demandes_envoyees")
 
             else:
                 form.add_error(
@@ -177,6 +192,10 @@ def demande_lecon (request, user_id):
 
     else :
         form = DemandeLeconForm()
+
+        form.fields['matiere'].queryset = prof.sujets_prof.all()
+        #Les matières possibles de sellectioner dans le form seront celles que le prof enseigne
+        #Queryset indique qu'on va chercher dans la base de données 
 
     return render(
         request,

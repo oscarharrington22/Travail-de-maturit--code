@@ -13,7 +13,6 @@ class ModifierCompteForm(forms.ModelForm):
         "ville",
         "bibliographie",
         "est_prof"
-        
         )
 
 class RechercheForm (forms.Form):
@@ -58,6 +57,13 @@ class RechercheForm (forms.Form):
         )
 
 class DemandeLeconForm (forms.ModelForm):
+
+    nombre_semaines = forms.IntegerField(
+        initial=1,
+        min_value=1,
+        label="Nombre de semaines de répétition"
+        )
+
     class Meta :
         model = DemandeLecon
         fields = (

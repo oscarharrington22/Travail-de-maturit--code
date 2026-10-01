@@ -24,16 +24,15 @@
         <ul class="w3-ul w3-margin-top">
         {% for demande in demandes_liste %}
             <li class="w3-card-2 w3-margin-bottom">
-                <p><h3>Cours de {{ demande.matiere }}    
+                <p><h3>Cours du {{ demande.date }}    
                     {% if demande.eleve == request.user or demande.prof == request.user %}
                         <a href="{% url 'supprimer_demande' demande.id %}" class="w3-text-red" ><i class="fa fa-trash"></i></a>
                     {% endif %}
                     </h3> 
-                Repetiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
+                Répétiteur : {{ demande.prof.first_name }} {{ demande.prof.last_name }}
                 <br>Élève : {{ demande.eleve.first_name }} {{ demande.eleve.last_name }}
-                <br>Date : {{ demande.date }}
-                <br>Heure de début : {{ demande.heure_debut }}
-                <br>Heure de fin : {{ demande.heure_fin }}
+                <br>Matière : {{ demande.matiere }}
+                <br>Horaire: de {{ demande.heure_debut }} à {{ demande.heure_fin }}
                 <br>Lieu : {{ demande.lieu}}
                 <br>Statut : {{ demande.get_statut_display }}</p>
 

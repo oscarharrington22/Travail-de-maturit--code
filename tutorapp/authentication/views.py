@@ -52,7 +52,12 @@ def upload_profile_photo(request):
 
 @login_required
 def mes_disponibilites(request):
-    disponibilites_liste = request.user.disponibilites.all()
+
+    ordre_jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
+    queryset = request.user.disponibilites.all()
+
+    disponibilites_liste = sorted(queryset, key=lambda i: (ordre_jours.index(i.jour), x.heure_debut))
+
     if not request.user.est_prof:
         return redirect('home')
 
