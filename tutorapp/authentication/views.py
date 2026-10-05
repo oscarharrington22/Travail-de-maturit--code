@@ -56,7 +56,7 @@ def mes_disponibilites(request):
     ordre_jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
     queryset = request.user.disponibilites.all()
 
-    disponibilites_liste = sorted(queryset, key=lambda i: (ordre_jours.index(i.jour), x.heure_debut))
+    disponibilites_liste = sorted(queryset, key=lambda x: (ordre_jours.index(x.jour), x.heure_debut))
 
     if not request.user.est_prof:
         return redirect('home')

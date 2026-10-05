@@ -59,7 +59,11 @@
     </div>
 
     <div class="w3-container w3-padding w3-margin-top w3-center">
-        <a href="{% url 'demande_lecon' repetiteur.id %}" class="w3-button w3-indigo w3-round-xxlarge w3-hover-light-blue">Demander une leçon</a>
+        {% if repetiteur.disponibilites.exists %}
+            <a href="{% url 'demande_lecon' repetiteur.id %}"class="w3-button w3-indigo w3-round-xxlarge">Demander une leço</a>
+        {% else %}
+            <p class="w3-opacity">Ce répétiteur n'a aucune disponibilité, vous ne pouvez pas lui envoyer de demandes.</p>
+        {% endif %}
     </div>
 
 {% endblock content %}
