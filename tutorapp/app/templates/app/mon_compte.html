@@ -10,7 +10,7 @@
         <div class="w3-bar">
             <div class="w3-bar-item">
                 {% if user.photo_de_profil %}
-                    <img src="{{ repetiteur.photo_de_profil.url }}"
+                    <img src="{{ user.photo_de_profil.url }}"
                         class="w3-circle w3-hide-small w3-border"
                         style="width:100px; height:100px; object-fit:cover;">
                 {% else %}
