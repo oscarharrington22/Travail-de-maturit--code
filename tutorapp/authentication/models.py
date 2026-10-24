@@ -46,21 +46,19 @@ class User (AbstractUser):
 
     sujets_prof = models.ManyToManyField(
         Sujet,
-        blank=True,  
+        null=True,  
         verbose_name='Sujets enseignés'       
         )
 
     tarif = models.PositiveIntegerField(
         validators=[MinValueValidator(0)], 
         verbose_name="Tariff à l'heure" ,
-        blank=True,
         null=True
         )
     
     niveau_etudes = models.ForeignKey(
         NiveauEtudes,
         on_delete=models.SET_NULL,
-        blank =True,
         null=True,
         verbose_name="Niveau d'études"
     )
