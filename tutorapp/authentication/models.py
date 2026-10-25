@@ -46,7 +46,7 @@ class User (AbstractUser):
 
     sujets_prof = models.ManyToManyField(
         Sujet,
-        null=True,  
+        blank=True,  
         verbose_name='Sujets enseignés'       
         )
 
