@@ -40,11 +40,11 @@
             </ul>
             <b>Bibliographie : </b>
             {% if repetiteur.bibliographie %} 
-                <br> {{ repetiteur.bibliographie }}
+                <br> {{ repetiteur.bibliographie }}<br>
             {% else %}
-                <br> Pas de bibliographie personelle
-            {% endif %}<br>
-            <b>Disponibilités : </b>
+                <br> Pas de bibliographie personelle <br>
+            {% endif %}
+            <br><b>Disponibilités : </b>
             {% if disponibilite_liste %} 
                 <ul>
                     {% for disponibilite in disponibilite_liste %}
@@ -60,7 +60,7 @@
 
     <div class="w3-container w3-padding w3-margin-top w3-center">
         {% if repetiteur.disponibilites.exists %}
-            <a href="{% url 'demande_lecon' repetiteur.id %}"class="w3-button w3-indigo w3-round-xxlarge">Demander une leço</a>
+            <a href="{% url 'demande_lecon' repetiteur.id %}"class="w3-button w3-indigo w3-round-xxlarge">Demander une leçon</a>
         {% else %}
             <p class="w3-opacity">Ce répétiteur n'a aucune disponibilité, vous ne pouvez pas lui envoyer de demandes.</p>
         {% endif %}
