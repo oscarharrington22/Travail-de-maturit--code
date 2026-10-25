@@ -55,7 +55,7 @@ Et enfin
 ```bash
 git --version
 ```
-Si git n'est pas instellé, allez l'installer depuis [le site officiel](https://git-scm.com/install/?utm_source=chatgpt.com)
+Si git n'est pas instellé, allez l'installer depuis [**le site officiel**](https://git-scm.com/install/?utm_source=chatgpt.com)
 
 ### 1. Clonage du code
 
