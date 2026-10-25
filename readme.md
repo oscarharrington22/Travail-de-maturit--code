@@ -44,7 +44,7 @@ Si cette commande ne fonctione pas utilisez
 ```bash
 python3 --version
 ```
-Si aucune de ces deux commandes ne fonctionne, allez installer python sur [le site officiel python] (https://www.python.org/downloads/)
+Si aucune de ces deux commandes ne fonctionne, allez installer python sur [**le site officiel python**](https://www.python.org/downloads/)
 
 Puis
 ```bash
