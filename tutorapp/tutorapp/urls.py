@@ -52,6 +52,8 @@ urlpatterns = [
     path('recherche/', app.views.recherche, name='recherche'),
     path('profil/<int:user_id>/', app.views.profil, name='profil'),
     path('demande-lecon/<int:user_id>/', app.views.demande_lecon, name = 'demande_lecon'),
+        # '<int:user_id>' indique qu'à cet endroit de l'URL, il y a un nombre entier 
+        # Et demande de le renvoyer à la vue sous le nom user_id
 
     path('mes-disponibilites/', authentication.views.mes_disponibilites, name = 'mes_disponibilites'),
     path('nouvelle-disponibilite/', authentication.views.nouvelle_disponibilite, name = 'nouvelle_disponibilite'),
@@ -66,4 +68,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+        )

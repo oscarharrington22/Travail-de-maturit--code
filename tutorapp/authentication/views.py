@@ -98,7 +98,7 @@ def nouvelle_disponibilite(request):
 
 @login_required
 def supprimer_disponibilite(request, id):
-    """Supprime un créneau, à condition qu'il appartienne à l'utilisateur connecté."""
+    """Supprime un créneau, à condition qu'il appartienne à l'utilisateur connecté """
     # 'prof=request.user' empêche de supprimer le créneau d'un autre répétiteur en changeant l'id dans l'URL
     creneau = Disponibilite.objects.get(id=id, prof=request.user)
     creneau.delete()
