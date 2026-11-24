@@ -37,7 +37,7 @@ def signup_prof(request):
     form = forms.SignupProfForm(instance=request.user) # pré-rempli avec les infos de l'utilisateur ('instance=request.user')
 
     if request.method == 'POST':
-        form = forms.SignupProfForm(request.POST, instance=request.user)
+        form = forms.SignupProfForm(request.POST, instance = request.user) #information qu'il manquait
         if form.is_valid():
             form.save()
             return redirect(settings.LOGIN_REDIRECT_URL)

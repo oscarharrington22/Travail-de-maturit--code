@@ -168,7 +168,6 @@ def demande_lecon (request, user_id):
 
             jours = [
                 "lundi",
-                "lundi",
                 "mardi",
                 "mercredi",
                 "jeudi",
