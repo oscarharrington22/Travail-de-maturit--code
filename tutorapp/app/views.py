@@ -129,7 +129,17 @@ def recherche (request):
 def profil (request, user_id):
     """Page de profil public d'un répétiteur, avec ses disponibilités"""
     repetiteur = User.objects.get(id=user_id) # user_id vient de l'URL
-    disponibilite_liste = Disponibilite.objects.filter(prof=repetiteur)
+
+    # Liste dans l'ordre de la semaine
+    ordre_jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
+    # Objet django qui prend toutes des disponibilités
+    queryset = Disponibilite.objects.filter(prof=repetiteur)
+
+    # Dans la liste de disponibilités, sorted parcourt le queryset 1 par 1 et le trie selon la clé donnée
+    # 'key' indique à 'sorted' selon quel critère trier, ici selon ce qui est renvoyé par la fonction lambda
+    # 'lambda' est une fonction définie sur une ligne:
+    # elle prend 'creneau' comme argument et renvoie le numero de jour et l'heure de chaque creneau dans queryset
+    disponibilite_liste = sorted(queryset, key=lambda creneau: (ordre_jours.index(creneau.jour), creneau.heure_debut))
 
     return render(request, "app/profil.html",
         {
