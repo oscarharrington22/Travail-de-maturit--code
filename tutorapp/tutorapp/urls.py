@@ -16,17 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+# Vues de connexion et de changement de mot de passe fournies par Django (pas besoin de les recoder)
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
 
 import authentication.views
 import app.views
 
+# Nécessaires pour afficher les photos de profil envoyées par les utilisateurs
 from django.conf import settings
 from django.conf.urls.static import static
+
+# path('adresse/', vue, name='nom') : 
+# Le 'name' permet d'écrire '{% url 'nom' %}' dans les gabarits et 'redirect('nom')' dans les vues, sans retaper l'adresse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # --- Connexion et inscription ---
+    # La page de connexion est la page d'accueil du site ('').
+    # 'redirect_authenticated_user=True', un utilisateur déjà connecté est renvoyé vers l'acceuil
     path('', LoginView.as_view(
             template_name='authentication/login.html',
             redirect_authenticated_user=True), name='login'),
@@ -34,6 +43,7 @@ urlpatterns = [
     path('signup_prof/', authentication.views.signup_prof, name='signup_prof'),
     path('logout/', authentication.views.logout_user, name='logout'),
 
+    # --- Changement de mot de passe (vues prêtes à l'emploi de Django, on ne fournit que les templates) ---
     path('change-password/', PasswordChangeView.as_view(
         template_name='authentication/changepw.html',
         success_url='/change-password-done/'
@@ -42,6 +52,7 @@ urlpatterns = [
         template_name='authentication/change_pw_done.html'
         ), name='change_password_done'),
 
+    # --- Compte de l'utilisateur ---
     path('home/', app.views.home, name='home'),
     path('mon-compte/', app.views.mon_compte, name='mon_compte'),
     path('modifier/', app.views.page_modification, name='page_modification'),
@@ -49,16 +60,20 @@ urlpatterns = [
     path('modifier-mon-compte-prof/', app.views.modifier_compte_prof, name='modifier_compte_prof'),
     path('profile-photo-upload', authentication.views.upload_profile_photo,name='upload_profile_photo'),
 
+    # --- Recherche et demandes de leçon ---
     path('recherche/', app.views.recherche, name='recherche'),
     path('profil/<int:user_id>/', app.views.profil, name='profil'),
     path('demande-lecon/<int:user_id>/', app.views.demande_lecon, name = 'demande_lecon'),
-        # '<int:user_id>' indique qu'à cet endroit de l'URL, il y a un nombre entier 
-        # Et demande de le renvoyer à la vue sous le nom user_id
+    # '<int:user_id>' indique qu'à cet endroit de l'URL, il y a un nombre entier 
+    # Et demande de le renvoyer à la vue sous le nom user_id
 
+    # --- Disponibilités du répétiteur ---
     path('mes-disponibilites/', authentication.views.mes_disponibilites, name = 'mes_disponibilites'),
     path('nouvelle-disponibilite/', authentication.views.nouvelle_disponibilite, name = 'nouvelle_disponibilite'),
     path('supprimer-disponibilite/<int:id>/', authentication.views.supprimer_disponibilite, name='supprimer_disponibilite'),
+     # <int:id> : l'id du créneau à supprimer
 
+    # --- Gestion des demandes de leçon ---
     path('mes-demandes-envoyees/', app.views.mes_demandes_envoyees, name = 'mes_demandes_envoyees'),
     path('mes-demandes-recues/', app.views.mes_demandes_recues, name = 'mes_demandes_recues'),
     path('repondre-demande/<int:demande_id>/', app.views.repondre_demande, name = 'repondre_demande'),
@@ -66,6 +81,8 @@ urlpatterns = [
 
     ]
 
+# En mode développement (DEBUG = True), Django sert lui-même les fichiers envoyés
+# par les utilisateurs (photos de profil). En production, c'est le serveur web qui s'en charge.
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
