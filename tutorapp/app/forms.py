@@ -51,7 +51,7 @@ class RechercheForm (forms.Form):
         )
 
     # Nombre entier qui refuse les valeurs négatives
-    tarif_max = forms.IntegerField(
+    _max = forms.IntegerField(
         required=False,
         min_value=0,
         label="Tarif maximum"

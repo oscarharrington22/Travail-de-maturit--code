@@ -47,7 +47,7 @@ class User (AbstractUser):
     # Courte présentation du répétiteur (facultatif)
     bibliographie = models.CharField(
         max_length=200, 
-        verbose_name="Bibliographie",
+        verbose_name="Biographie",
         blank=True,
         null=True
     )
@@ -69,7 +69,7 @@ class User (AbstractUser):
     # Tarif à l'heure, uniquement pour les répétiteurs (null=True)
     tarif = models.PositiveIntegerField(
         validators=[MinValueValidator(0)], 
-        verbose_name="Tariff à l'heure" ,
+        verbose_name="Tarif à l'heure" ,
         null=True
         )
     

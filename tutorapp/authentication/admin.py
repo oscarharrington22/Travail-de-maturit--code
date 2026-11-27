@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from .models import Disponibilite 
+from .models import Disponibilite, Sujet
 
 User = get_user_model()
 
 admin.site.register(User)
 
 admin.site.register(Disponibilite)
+
+admin.site.register(Sujet)
