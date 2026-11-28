@@ -59,7 +59,9 @@ class User (AbstractUser):
         )
 
     # Matières enseignées : un répétiteur peut en avoir plusieurs et une
-    # matière peut être enseignée par plusieurs répétiteurs (ManyToMany)
+    # matière peut être enseignée par plusieurs répétiteurs (ManyToMany) 
+    # Remarque : Ici c'est blank = True, cette partie du formulaire peut donc rester vide
+    # C'est parceque les ManyToManyField ne prennent pas de null = True
     sujets_prof = models.ManyToManyField(
         Sujet,
         blank=True,  
